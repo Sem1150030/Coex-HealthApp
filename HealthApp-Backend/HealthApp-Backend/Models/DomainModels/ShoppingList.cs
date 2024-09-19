@@ -4,7 +4,7 @@ public class ShoppingList
 {
     public Guid Id { get; set; }
     public DateTime CreatedOn { get; set; }
-    public List<FoodItem> FoodItems { get; set; }
+    public List<ShoppingListFoodItem> ShoppingListFoodItems { get; set; } // Junction table for many-to-many
     public Guid UserId { get; set; }
     public int KcalGoal { get; set; }
     public int proteinGoal { get; set; }

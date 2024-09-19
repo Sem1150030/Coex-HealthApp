@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\semst\\Desktop\\HealthApp\\HealthApp-Backend\\HealthApp-Backend\\HealthApp-Backend.csproj": {}
+    "C:\\Users\\Gebruiker\\OneDrive\\Bureaublad\\Health App\\Coex-HealthApp\\HealthApp-Backend\\HealthApp-Backend\\HealthApp-Backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\semst\\Desktop\\HealthApp\\HealthApp-Backend\\HealthApp-Backend\\HealthApp-Backend.csproj": {
+    "C:\\Users\\Gebruiker\\OneDrive\\Bureaublad\\Health App\\Coex-HealthApp\\HealthApp-Backend\\HealthApp-Backend\\HealthApp-Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\semst\\Desktop\\HealthApp\\HealthApp-Backend\\HealthApp-Backend\\HealthApp-Backend.csproj",
+        "projectUniqueName": "C:\\Users\\Gebruiker\\OneDrive\\Bureaublad\\Health App\\Coex-HealthApp\\HealthApp-Backend\\HealthApp-Backend\\HealthApp-Backend.csproj",
         "projectName": "HealthApp-Backend",
-        "projectPath": "C:\\Users\\semst\\Desktop\\HealthApp\\HealthApp-Backend\\HealthApp-Backend\\HealthApp-Backend.csproj",
-        "packagesPath": "C:\\Users\\semst\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\semst\\Desktop\\HealthApp\\HealthApp-Backend\\HealthApp-Backend\\obj\\",
+        "projectPath": "C:\\Users\\Gebruiker\\OneDrive\\Bureaublad\\Health App\\Coex-HealthApp\\HealthApp-Backend\\HealthApp-Backend\\HealthApp-Backend.csproj",
+        "packagesPath": "C:\\Users\\Gebruiker\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Gebruiker\\OneDrive\\Bureaublad\\Health App\\Coex-HealthApp\\HealthApp-Backend\\HealthApp-Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\semst\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Gebruiker\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -80,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

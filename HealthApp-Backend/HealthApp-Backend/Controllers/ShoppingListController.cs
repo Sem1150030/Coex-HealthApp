@@ -6,5 +6,5 @@ namespace HealthApp_Backend.Controllers;
 [Route("[controller]")]
 public class ShoppingListController : Controller
 {
-    public 
+    
 }
