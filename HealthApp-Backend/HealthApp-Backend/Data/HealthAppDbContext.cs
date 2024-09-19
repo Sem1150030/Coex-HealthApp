@@ -9,19 +9,19 @@ namespace HealthApp_Backend.Data
         public HealthAppDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
         }
-
+        public DbSet<ShoppingListFoodItem> ShoppingListFoodItems { get; set; } 
         public DbSet<ShoppingList> ShoppingLists { get; set; }
         public DbSet<FoodItem> FoodItems { get; set; }
         public DbSet<WeightTracker> WeightTrackers { get; set; }
-        public DbSet<ShoppingListFoodItem> ShoppingListFoodItems { get; set; } // Add this line for the junction table
+        // Add this line for the junction table
             
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder
-                .UseSqlServer("YourConnectionStringHere")
-                .ConfigureWarnings(warnings => warnings
-                    .Ignore(RelationalEventId.PendingModelChangesWarning));
-        }
+        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        // {
+        //     optionsBuilder
+        //         .UseSqlServer("HealthAppConnectionStrings")
+        //         .ConfigureWarnings(warnings => warnings
+        //             .Ignore(RelationalEventId.PendingModelChangesWarning));
+        // }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -149,6 +149,20 @@ namespace HealthApp_Backend.Data
                 },
             };
             modelBuilder.Entity<ShoppingListFoodItem>().HasData(shoppingListFoodItems);
+            
+            modelBuilder.Entity<ShoppingListFoodItem>()
+                .HasKey(slfi => new { slfi.ShoppingListId, slfi.FoodItemId });
+            
+            modelBuilder.Entity<ShoppingListFoodItem>()
+                .HasOne(slfi => slfi.ShoppingList)
+                .WithMany(sl => sl.ShoppingListFoodItems)
+                .HasForeignKey(slfi => slfi.ShoppingListId);
+            
+            modelBuilder.Entity<ShoppingListFoodItem>()
+                .HasOne(slfi => slfi.FoodItem)
+                .WithMany(fi => fi.ShoppingListFoodItems)
+                .HasForeignKey(slfi => slfi.FoodItemId);
+
         }
     }
 }

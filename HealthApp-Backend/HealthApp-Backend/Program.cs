@@ -1,4 +1,5 @@
 using HealthApp_Backend.Data;
+using HealthApp_Backend.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<HealthAppDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("HealthAppConnectionStrings")));
+
+builder.Services.AddScoped<IShoppingListrepository, SQLShoppingListRepository>();
+// builder.Services.AddScoped<IFoodItemRepository, SQLFoodItemRepository>();
 
 var app = builder.Build();
 
