@@ -12,5 +12,8 @@ public class AutoMapperProfiles: Profile
         CreateMap<ShoppingListFoodItem, ShoppingListFoodItemDto>().ReverseMap(); 
         CreateMap<FoodItem, FoodItemDto>().ReverseMap();
         CreateMap<FoodItem, FoodItemReturnDto>().ReverseMap();
+        CreateMap<FoodItem, CreateFoodItemMappingDto>().ReverseMap();
+        CreateMap<ShoppingListFoodItemRequestDto, ShoppingListFoodItem>().ReverseMap();
+
     }
 }

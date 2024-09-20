@@ -21,4 +21,21 @@ public class SQLShoppingListRepository: IShoppingListrepository
             .ThenInclude(slfi => slfi.FoodItem)
             .ToListAsync();
     }
+
+  
+
+    public async Task<ShoppingList?> GetShoppingListPerId(Guid id)
+    {
+        return await dbContext.ShoppingLists.Include(sl => sl.ShoppingListFoodItems)
+            .ThenInclude(slfi => slfi.FoodItem).FirstOrDefaultAsync(x => x.Id == id);
+
+    }
+
+    public async Task<ShoppingListFoodItem> AddItemToShoppingListAsync(ShoppingListFoodItem shoppingListFoodItem)
+    {
+        await dbContext.ShoppingListFoodItems.AddAsync(shoppingListFoodItem);
+        await dbContext.SaveChangesAsync();
+        return shoppingListFoodItem;
+
+    }
 }

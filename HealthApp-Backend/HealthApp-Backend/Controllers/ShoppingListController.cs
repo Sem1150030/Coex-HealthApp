@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HealthApp_Backend.Models.DomainModels;
 using HealthApp_Backend.Models.Dto;
 using HealthApp_Backend.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -12,11 +13,15 @@ public class ShoppingListController : Controller
     
     private readonly IShoppingListrepository iShoppingListrepository;
     private readonly IMapper mapper;
+    private readonly IFoodItemRepository foodItemRepository;
+
     
-    public ShoppingListController(IShoppingListrepository iShoppingListrepository, IMapper mapper)
+    public ShoppingListController(IShoppingListrepository iShoppingListrepository, IMapper mapper, 
+        IFoodItemRepository foodItemRepository)
     {
         this.iShoppingListrepository = iShoppingListrepository;
         this.mapper = mapper;
+        this.foodItemRepository = foodItemRepository;
     }
     
     [HttpGet]
@@ -24,10 +29,31 @@ public class ShoppingListController : Controller
     {
         var shoppingListItems = await iShoppingListrepository.GetAllShoppingListItemsAsync();
 
-        // Map to DTOs inline
+        
         var shoppingListDtos = mapper.Map<List<ShoppingListReturnDto>>(shoppingListItems);
         
         return Ok(shoppingListDtos);
+    }
+    
+    [HttpGet]
+    [Route("{id:Guid}")]
+    public async Task<IActionResult> GetShoppingListPerId(Guid id)
+    {
+        var shoppingListItems = await iShoppingListrepository.GetShoppingListPerId(id);
+
+        
+        var shoppingListDtos = mapper.Map<ShoppingListReturnDto>(shoppingListItems);
+        
+        return Ok(shoppingListDtos);
+    }
+    
+    [HttpPost]
+    [Route("AddItem")]
+    public async Task<IActionResult> AddItemToShoppingList([FromBody] ShoppingListFoodItemRequestDto shoppingListFoodItemRequestDto)
+    {
+        var sLFId = mapper.Map<ShoppingListFoodItem>(shoppingListFoodItemRequestDto);
+        await iShoppingListrepository.AddItemToShoppingListAsync(sLFId);
+        return Ok("Added item to shopping list");
     }
 
 

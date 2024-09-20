@@ -13,7 +13,7 @@ namespace HealthApp_Backend.Data
         public DbSet<ShoppingList> ShoppingLists { get; set; }
         public DbSet<FoodItem> FoodItems { get; set; }
         public DbSet<WeightTracker> WeightTrackers { get; set; }
-        // Add this line for the junction table
+      
             
         // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         // {
