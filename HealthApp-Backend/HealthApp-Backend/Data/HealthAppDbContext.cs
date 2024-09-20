@@ -14,7 +14,7 @@ namespace HealthApp_Backend.Data
         public DbSet<FoodItem> FoodItems { get; set; }
         public DbSet<WeightTracker> WeightTrackers { get; set; }
       
-            
+        //     
         // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         // {
         //     optionsBuilder
@@ -150,18 +150,25 @@ namespace HealthApp_Backend.Data
             };
             modelBuilder.Entity<ShoppingListFoodItem>().HasData(shoppingListFoodItems);
             
-            modelBuilder.Entity<ShoppingListFoodItem>()
-                .HasKey(slfi => slfi.Id);  // Primary key is the Id column
+            // Define composite key using ShoppingListId and FoodItemId
+            
 
+            // Optional: keep the Id as an auto-generated field
+            modelBuilder.Entity<ShoppingListFoodItem>()
+                .Property(slfi => slfi.Id).ValueGeneratedOnAdd();
+
+            // Relationships: ShoppingListFoodItem -> ShoppingList
             modelBuilder.Entity<ShoppingListFoodItem>()
                 .HasOne(slfi => slfi.ShoppingList)
                 .WithMany(sl => sl.ShoppingListFoodItems)
                 .HasForeignKey(slfi => slfi.ShoppingListId);
 
+            // Relationships: ShoppingListFoodItem -> FoodItem
             modelBuilder.Entity<ShoppingListFoodItem>()
                 .HasOne(slfi => slfi.FoodItem)
                 .WithMany(fi => fi.ShoppingListFoodItems)
                 .HasForeignKey(slfi => slfi.FoodItemId);
+
 
 
         }

@@ -52,7 +52,15 @@ public class ShoppingListController : Controller
     public async Task<IActionResult> AddItemToShoppingList([FromBody] ShoppingListFoodItemRequestDto shoppingListFoodItemRequestDto)
     {
         var sLFId = mapper.Map<ShoppingListFoodItem>(shoppingListFoodItemRequestDto);
-        await iShoppingListrepository.AddItemToShoppingListAsync(sLFId);
+        
+        var shoppingListFoodItem = new ShoppingListFoodItem
+        {
+            Id = Guid.NewGuid(),  // Generate a new unique Id
+            ShoppingListId = shoppingListFoodItemRequestDto.ShoppingListId,
+            FoodItemId = shoppingListFoodItemRequestDto.FoodItemId
+        };
+
+        await iShoppingListrepository.AddItemToShoppingListAsync(shoppingListFoodItem);
         return Ok("Added item to shopping list");
     }
 

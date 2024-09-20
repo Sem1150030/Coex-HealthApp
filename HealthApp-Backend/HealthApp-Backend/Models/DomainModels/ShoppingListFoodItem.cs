@@ -9,5 +9,4 @@ public class ShoppingListFoodItem
 
     public Guid FoodItemId { get; set; }
     public FoodItem FoodItem { get; set; } // Navigation property
-
 }
