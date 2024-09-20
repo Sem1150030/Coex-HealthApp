@@ -35,8 +35,8 @@ public class ShoppingListController : Controller
             ShoppingListFoodItems = shoppingList.ShoppingListFoodItems.Select(slf => new ShoppingListFoodItemDto
             {
                 Id = slf.Id,
-                ShoppingListId = slf.ShoppingListId,
-                FoodItemId = slf.FoodItemId,
+                // ShoppingListId = slf.ShoppingListId,
+                // FoodItemId = slf.FoodItemId,
                 FoodItem = new FoodItemDto
                 {
                     Id = slf.FoodItem.Id,

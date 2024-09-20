@@ -151,17 +151,18 @@ namespace HealthApp_Backend.Data
             modelBuilder.Entity<ShoppingListFoodItem>().HasData(shoppingListFoodItems);
             
             modelBuilder.Entity<ShoppingListFoodItem>()
-                .HasKey(slfi => new { slfi.ShoppingListId, slfi.FoodItemId });
-            
+                .HasKey(slfi => slfi.Id);  // Primary key is the Id column
+
             modelBuilder.Entity<ShoppingListFoodItem>()
                 .HasOne(slfi => slfi.ShoppingList)
                 .WithMany(sl => sl.ShoppingListFoodItems)
                 .HasForeignKey(slfi => slfi.ShoppingListId);
-            
+
             modelBuilder.Entity<ShoppingListFoodItem>()
                 .HasOne(slfi => slfi.FoodItem)
                 .WithMany(fi => fi.ShoppingListFoodItems)
                 .HasForeignKey(slfi => slfi.FoodItemId);
+
 
         }
     }
