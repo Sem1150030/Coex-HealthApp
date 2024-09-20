@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "5giCmcNLygY=",
+  "dgSpecHash": "GI5eTVrit9M=",
   "success": true,
   "projectFilePath": "C:\\Users\\Gebruiker\\OneDrive\\Bureaublad\\Health App\\Coex-HealthApp\\HealthApp-Backend\\HealthApp-Backend\\HealthApp-Backend.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Gebruiker\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Gebruiker\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Gebruiker\\.nuget\\packages\\azure.identity\\1.11.3\\azure.identity.1.11.3.nupkg.sha512",
     "C:\\Users\\Gebruiker\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
