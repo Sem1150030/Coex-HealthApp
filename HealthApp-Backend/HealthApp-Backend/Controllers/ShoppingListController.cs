@@ -2,11 +2,13 @@
 using HealthApp_Backend.Models.DomainModels;
 using HealthApp_Backend.Models.Dto;
 using HealthApp_Backend.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthApp_Backend.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("[controller]")]
 public class ShoppingListController : Controller
 {

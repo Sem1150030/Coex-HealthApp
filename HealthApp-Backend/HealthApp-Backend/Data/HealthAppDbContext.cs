@@ -6,7 +6,7 @@ namespace HealthApp_Backend.Data
 {
     public class HealthAppDbContext : DbContext
     {
-        public HealthAppDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+        public HealthAppDbContext(DbContextOptions<HealthAppDbContext> dbContextOptions) : base(dbContextOptions)
         {
         }
         public DbSet<ShoppingListFoodItem> ShoppingListFoodItems { get; set; } 
