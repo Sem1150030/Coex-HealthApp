@@ -6,5 +6,6 @@ public interface IShoppingListrepository
 {
     Task<List<ShoppingList>> GetAllShoppingListItemsAsync();
     Task<ShoppingList?> GetShoppingListPerId(Guid id);
-    Task<ShoppingListFoodItem> AddItemToShoppingListAsync(ShoppingListFoodItem shoppingListFoodItem);
+    Task<ShoppingListFoodItem> AddItemToShoppingListAsync(ShoppingListFoodItem shoppingListFoodItem, DateTime date);
+    Task<ShoppingList> GetShoppingListByUIDAndDateAsync(Guid userId, DateTime date);
 }

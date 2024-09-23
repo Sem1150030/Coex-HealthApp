@@ -21,7 +21,7 @@ public class HealthAppAuthDbContext: IdentityDbContext
             new IdentityRole
             {
                 Id = readerId,
-                ConcurrencyStamp = readerId,
+                ConcurrencyStamp = readerId,                
                 Name = "Reader",
                 NormalizedName = "Reader".ToUpper()
             },

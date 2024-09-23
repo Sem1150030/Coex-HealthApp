@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+using AutoMapper;
 using HealthApp_Backend.Models.DomainModels;
 using HealthApp_Backend.Models.Dto;
 using HealthApp_Backend.Repositories;
@@ -25,7 +26,7 @@ public class ShoppingListController : Controller
         this.mapper = mapper;
         this.foodItemRepository = foodItemRepository;
     }
-    
+    //Dev Only
     [HttpGet]
     public async Task<IActionResult> GetAllShoppingListItems()
     {
@@ -37,33 +38,66 @@ public class ShoppingListController : Controller
         return Ok(shoppingListDtos);
     }
     
+    //Dev Only
     [HttpGet]
     [Route("{id:Guid}")]
     public async Task<IActionResult> GetShoppingListPerId(Guid id)
     {
-        var shoppingListItems = await iShoppingListrepository.GetShoppingListPerId(id);
-
         
+        var shoppingListItems = await iShoppingListrepository.GetShoppingListPerId(id);
         var shoppingListDtos = mapper.Map<ShoppingListReturnDto>(shoppingListItems);
         
         return Ok(shoppingListDtos);
     }
     
+    //-----------------------------------------------------
+    //Production
+    
     [HttpPost]
     [Route("AddItem")]
     public async Task<IActionResult> AddItemToShoppingList([FromBody] ShoppingListFoodItemRequestDto shoppingListFoodItemRequestDto)
     {
+        var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdString == null)
+        {
+            return NotFound("User not found");
+        }
+        var userId = Guid.Parse(userIdString);
+        
         var sLFId = mapper.Map<ShoppingListFoodItem>(shoppingListFoodItemRequestDto);
+        var todaysDate = DateTime.Now.Date;
+        
+        var shoppingList = await iShoppingListrepository.GetShoppingListByUIDAndDateAsync(userId, todaysDate);
+        Guid shoppingListId = shoppingList.Id;
         
         var shoppingListFoodItem = new ShoppingListFoodItem
         {
-            Id = Guid.NewGuid(),  // Generate a new unique Id
-            ShoppingListId = shoppingListFoodItemRequestDto.ShoppingListId,
+            Id = Guid.NewGuid(), 
+            ShoppingListId = shoppingListId,
             FoodItemId = shoppingListFoodItemRequestDto.FoodItemId
         };
 
-        await iShoppingListrepository.AddItemToShoppingListAsync(shoppingListFoodItem);
+        await iShoppingListrepository.AddItemToShoppingListAsync(shoppingListFoodItem, todaysDate);
         return Ok("Added item to shopping list");
+    }
+    
+    [HttpGet]
+    [Route("User")]
+    public async Task<IActionResult> GetShoppingListByUIdAndDate()
+    {
+        var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdString == null)
+        {
+            return NotFound("User not found");
+        }
+        var userId = Guid.Parse(userIdString);
+        var todaysDate = DateTime.Now.Date;
+        
+        
+        var shoppingListItems = await iShoppingListrepository.GetShoppingListByUIDAndDateAsync(userId, todaysDate);
+        var shoppingListDtos = mapper.Map<ShoppingListReturnDto>(shoppingListItems);
+        
+        return Ok(shoppingListDtos);
     }
 
 

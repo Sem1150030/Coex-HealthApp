@@ -6,5 +6,6 @@ public interface IFoodItemRepository
 {
     Task<List<FoodItem>> GetAllFoodItemsAsync();
     Task<FoodItem> CreateFoodItemAsync(FoodItem foodItem);
-    Task<FoodItem?> GetFoodItemByIdAsync(Guid id);
+    Task<FoodItem?> GetFoodItemByIdAsync(Guid id, Guid userId);
+    Task<List<FoodItem>> GetAllFoodItemsByUIDAsync(Guid userId);
 }

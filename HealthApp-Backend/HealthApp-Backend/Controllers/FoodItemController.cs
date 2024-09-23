@@ -1,12 +1,15 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+using AutoMapper;
 using HealthApp_Backend.Models.DomainModels;
 using HealthApp_Backend.Models.Dto;
 using HealthApp_Backend.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthApp_Backend.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("[controller]")]
 public class FoodItemController : Controller
 {
@@ -31,10 +34,31 @@ public class FoodItemController : Controller
     }
     
     [HttpGet]
+    [Route("User")]
+    public async Task<IActionResult> GetAllByUId()
+    {
+        var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdString == null)
+        {
+            return NotFound("User not found");
+        }
+        var userId = Guid.Parse(userIdString);
+        var fooditems = await foodItemRepository.GetAllFoodItemsByUIDAsync(userId);
+        
+        return Ok(mapper.Map<List<FoodItemDto>>(fooditems));
+    }
+    
+    [HttpGet]
     [Route("{id:Guid}")]
     public async Task<IActionResult> GetFoodItemById(Guid id)
     {
-        var foodItem = await foodItemRepository.GetFoodItemByIdAsync(id);
+        var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdString == null)
+        {
+            return NotFound("User not found");
+        }
+        var userId = Guid.Parse(userIdString);
+        var foodItem = await foodItemRepository.GetFoodItemByIdAsync(id, userId);
         return Ok(mapper.Map<FoodItemDto>(foodItem));
     }
 
@@ -45,7 +69,13 @@ public class FoodItemController : Controller
         var shoppingListFoodItems = new List<ShoppingListFoodItem>();
         
         var shoppingListFoodItemDtos = mapper.Map<List<ShoppingListFoodItemDto>>(shoppingListFoodItems);
-        var userId = "7533E49E-EB8D-4E6B-8EF6-848EB43ED294";
+        
+        var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdString == null)
+        {
+            return NotFound("User not found");
+        }
+        var userId = Guid.Parse(userIdString);
 
         
         var CreateFoodItemMappingDto = new CreateFoodItemMappingDto()
@@ -55,7 +85,7 @@ public class FoodItemController : Controller
              proteinAmount = foodItemDto.proteinAmount,
              measurement = foodItemDto.measurement,
              ShoppingListFoodItems = shoppingListFoodItemDtos,
-             userId = Guid.Parse(userId)
+             userId = userId
         };
         var foodItem = mapper.Map<FoodItem>(CreateFoodItemMappingDto);
         
