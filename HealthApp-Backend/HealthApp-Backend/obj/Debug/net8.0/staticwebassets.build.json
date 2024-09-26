@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "ELCEIWh5ukegd4sJhmfmHBLc1SxlubxxZ6dtm3Pk/uk=",
+  "Source": "HealthApp-Backend",
+  "BasePath": "_content/HealthApp-Backend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
