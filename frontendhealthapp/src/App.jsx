@@ -4,6 +4,7 @@ import Weight from "./pages/Weight/Weight.jsx"
 
 import { createBrowserRouter, RouterProvider} from 'react-router-dom';
 import RootLayout from "./Root.jsx";
+import Workout from "./pages/Workout/Workout.jsx";
 
 const router = createBrowserRouter([
     {
@@ -11,7 +12,8 @@ const router = createBrowserRouter([
         element: <RootLayout />,
         children: [
             { path: '/', element: <Macros /> },
-            { path: '/weight', element: <Weight />}
+            { path: '/weight', element: <Weight />},
+            { path: '/workout', element: <Workout />}
         ]
     }
 
