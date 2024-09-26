@@ -1,5 +1,5 @@
 import './Macros.css';
-import DonutChart from '../DonutChart.jsx'
+import DonutChart from '../../components/DonutChart.jsx';
 
 export default function Macros() {
 

@@ -7,19 +7,32 @@ ul {
     margin: 0;
     padding: 0;
     list-style: none;
-    display: flex;
+    display: flex;  /*  items naast elkaar */
     width: 100%;
     background-color: #3D3F51;
-    justify-content: center;
-    align-items: center;     /* Align items vertically */
-    height: 50px;
+    justify-content: center; /*  Horizontally */
+    align-items: center;     /*  vertically */
+    height: 50px;           /*  Height of the navbar */
     position: fixed;
     z-index: 1000;
 }
 
 li {
     margin: 70px;
+}
+
+a{
+    text-decoration: none;
     color: white;
+}
+.active {
+    font-weight: 700; /* This makes the text extra bold */
+
+}
+
+
+Link {
+    text-decoration: none;
 }
 
 .alignRight {
