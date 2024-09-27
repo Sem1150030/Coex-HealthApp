@@ -1,11 +1,14 @@
 import './Macros.css';
 import DonutChart from '../../components/DonutChart.jsx';
 import { useEffect, useState } from "react";
+import MacroDashboardData from "../../components/MacroDashboardData.jsx";
+import ShoppingList from "../../components/ShoppingList.jsx";
 
 export default function Macros() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true); // Add loading state
     const [error, setError] = useState(null); // Add error state
+    const [shoppingListFoodItems, setShoppingListFoodItems] = useState([{}]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,12 +34,14 @@ export default function Macros() {
 
                 const result = await response.json();
                 setData(result);
+                setShoppingListFoodItems(result.shoppingListFoodItems);
                 console.log("data: ", JSON.stringify(result, null, 2));
             } catch (error) {
                 console.error("Fetch error: ", error);
                 setError(error.message);
             } finally {
-                setLoading(false); // Stop loading regardless of success or failure
+                setLoading(false);
+
             }
         };
 
@@ -51,6 +56,9 @@ export default function Macros() {
         return <div className='error'>{error}</div>; // Show error message if any
     }
 
+    function consoleLog(){
+        return console.log(shoppingListFoodItems)
+    }
     return (
         <div>
             <div className='container'>
@@ -58,29 +66,20 @@ export default function Macros() {
             </div>
             <div className='container'>
                 <div className='containerMacros'>
-                    <br/> <br/>
-                    <div>
-                        <DonutChart width={400} height={400}/>
-                    </div>
-                    <br/> <br/> <br/>
-                    <div className="Dashboarddatacontainer">
-                        <div className='textcon'>
-                            <p className='dashboard'>{data.kcalGoal}</p>
-                            <p className='information'>Kcal Left</p>
+                    <br/><br/>
+                    <DonutChart dataProp={data} width={400} height={400}/>
+                    <MacroDashboardData data={data}/>
 
-                        </div>
-                        <div className='textcon'>
-                            <h2 className='dashboard'>{data.kcalCurrent}</h2>
-                            <p className='information'>Kcal Consumed</p>
-                        </div>
-                        <div className='textcon'>
-                            <p className='dashboard'>{data.kcalGoal - data.kcalCurrent}</p>
-                            <p className='information'>Kcal Goal</p>
-
-                        </div>
-                    </div>
                 </div>
             </div>
+            <div className='container'>
+                <div className='containerMacros'>
+                    <br/><br/>
+                    <button onClick={consoleLog}>klik me</button>
+                    <ShoppingList data={shoppingListFoodItems}/>
+                </div>
+            </div>
+
         </div>
     );
 }
