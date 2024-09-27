@@ -15,6 +15,28 @@
   align-items: center;        /* Center vertically */
 }
 
-/*.title {*/
-/*  linearGradient: ";*/
-/*}*/
+.Dashboarddatacontainer{
+  display: flex;
+  justify-content: center;
+
+}
+
+.dashboard{
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+h2.dashboard{
+  font-size: 30px;
+  margin-top: -20px;
+}
+
+p.dashboard{
+  font-size: 20px;
+}
+
+p.information {
+  color: #524848;
+}
+
+

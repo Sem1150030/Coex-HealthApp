@@ -1,24 +1,30 @@
 import { Doughnut } from 'react-chartjs-2';
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
+import PropTypes from "prop-types";
+
 
 // Register the necessary chart.js components
 Chart.register(ArcElement, Tooltip, Legend);
 
 const DonutChart = () => {
     // Define the chart data
+    const kcalConsumed = 2000;
+    const kcalGoal = 2500;
+    const kcalLeft = kcalGoal - kcalConsumed;
+
     const data = {
         labels: ['Kcal Consumed', 'Kcal left'],
         datasets: [
             {
-                label: 'Votes',
-                data: [1700, 800],
+                label: 'Kcals',
+                data: [kcalConsumed, kcalLeft ],
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.6)',
+                    'rgb(66, 99, 227)',
                     'rgba(54, 162, 235, 0.6)',
 
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
+                    'rgb(66, 99, 227)',
                     'rgba(54, 162, 235, 1)',
 
                 ],
@@ -50,5 +56,15 @@ const DonutChart = () => {
         </div>
     );
 };
+
+DonutChart.propTypes = {
+    kcalConsumed: PropTypes.number.isRequired, // Expect kcalConsumed to be a number and required
+    kcalGoal: PropTypes.number.isRequired, // Expect kcalGoal to be a number and required
+};
+DonutChart.defaultProps = {
+    kcalConsumed: 0, // Default value if not provided
+    kcalGoal: 0, // Default value if not provided
+};
+
 
 export default DonutChart;

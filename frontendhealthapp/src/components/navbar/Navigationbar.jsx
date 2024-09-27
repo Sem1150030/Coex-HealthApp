@@ -25,11 +25,18 @@ export default function Navigationbar() {
                 <li>
                     <NavLink
                         to='/weight'
-                        className={({isActive}) => (isActive ? 'active' : '')}
-                    >
+                        className={({isActive}) => (isActive ? 'active' : '')}>
                         Weight
                     </NavLink>
                 </li>
+                <li>
+                    <NavLink
+                        to='/auth?mode=login'
+                        className={({isActive}) => (isActive ? 'active' : '')}>
+                        Login
+                    </NavLink>
+                </li>
+
             </ul>
             <br/>
             <br/>
