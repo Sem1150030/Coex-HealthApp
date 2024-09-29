@@ -35,6 +35,7 @@ export async function action({request}) {
 
 
 
+
     if(response.status === 422 || response.status === 401){
         return response;
     }
@@ -53,12 +54,20 @@ export async function action({request}) {
         throw json({message: 'Failed to authenticate'}, {status: 500});
     }
 
+
+
     const resData = await response.json()
     console.log('Response Data:', JSON.stringify(resData, null, 2)); // Pretty prints with 2-space indentation
     const token = resData.jwtToken;
 
     localStorage.setItem('token', token);
 
-    return redirect('/');
+    if (mode === 'login') {
+        return redirect('/');
+    }
 
+    if (mode === 'signup') {
+        alert('User created successfully youll ber redirected to login page')
+        return redirect('/auth?mode=login');
+    }
 }

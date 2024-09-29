@@ -1,5 +1,5 @@
 import './Macros.css';
-import DonutChart from '../../components/DonutChart.jsx';
+import DonutChart from '../../components/Charts/DonutChart.jsx';
 import { useEffect, useState } from "react";
 import MacroDashboardData from "../../components/MacroDashboardData.jsx";
 import ShoppingList from "../../components/ShoppingList.jsx";
@@ -9,6 +9,8 @@ export default function Macros() {
     const [loading, setLoading] = useState(true); // Add loading state
     const [error, setError] = useState(null); // Add error state
     const [shoppingListFoodItems, setShoppingListFoodItems] = useState([{}]);
+
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -56,9 +58,7 @@ export default function Macros() {
         return <div className='error'>{error}</div>; // Show error message if any
     }
 
-    function consoleLog(){
-        return console.log(shoppingListFoodItems)
-    }
+
     return (
         <div>
             <div className='container'>
@@ -68,14 +68,14 @@ export default function Macros() {
                 <div className='containerMacros'>
                     <br/><br/>
                     <DonutChart dataProp={data} width={400} height={400}/>
-                    <MacroDashboardData data={data}/>
+                    <MacroDashboardData data={data} />
 
                 </div>
             </div>
             <div className='container'>
-                <div className='containerMacros'>
+                <div className='containerShoppinglistMacros'>
                     <br/><br/>
-                    <button onClick={consoleLog}>klik me</button>
+
                     <ShoppingList data={shoppingListFoodItems}/>
                 </div>
             </div>
