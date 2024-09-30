@@ -12,6 +12,12 @@
     z-index: 1000; /* Make sure it's above other content */
 }
 
+/* Add this to AddItemToShoppinglist.css */
+.no-scroll {
+    overflow: hidden;
+}
+
+
 .modal-content {
     background: #95B7DF;
     padding: 20px;

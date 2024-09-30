@@ -2,6 +2,7 @@
 // import PropTypes, {func} from "prop-types";
 import {useEffect, useState} from "react";
 import PropTypes from "prop-types";
+import './AddItemToShoppinglist.css'
 
 function AddItemToShoppinglist({ isOpen, onClose }) {
     const [loading, setLoading] = useState(true); // Add loading state
@@ -9,6 +10,9 @@ function AddItemToShoppinglist({ isOpen, onClose }) {
     const [fooditems, setFooditems] = useState([{}]); // Add error state
 
     useEffect(() => {
+
+
+
         const fetchData = async () => {
             const token = localStorage.getItem('token');
             if (!token) {
@@ -43,7 +47,20 @@ function AddItemToShoppinglist({ isOpen, onClose }) {
         };
 
         fetchData();
-    }, []);
+
+        if (isOpen) {
+            document.body.classList.add('no-scroll'); // Hide scrollbar when modal is open
+        } else {
+            document.body.classList.remove('no-scroll'); // Restore scrollbar when modal is closed
+        }
+
+        // Cleanup on component unmount or when modal closes
+        return () => {
+            document.body.classList.remove('no-scroll');
+        };
+    }, [isOpen]);
+
+
 
     if (!isOpen) return null;
 
@@ -85,16 +102,41 @@ function AddItemToShoppinglist({ isOpen, onClose }) {
 
     return (
         <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content" onClick={e => e.stopPropagation()}>
-                {fooditems.map((foodItem) => {
-                    return (
-                        <div className="arrayItems" key={foodItem.id}>
-                            {foodItem.name} -
-                            <button onClick={() => handleClickAddItem(foodItem.id)}>Add</button>
-                        </div>
-                    );
-                })}
-                <button onClick={onClose}>Close</button>
+            <div>
+                <div className="modal-content" onClick={e => e.stopPropagation()}>
+                    <h1>Add item</h1>
+                    <button className='closeButton' onClick={onClose}>X</button>
+                    <br/>
+                    <hr/>
+                    <br/>
+                    <div className="table-container">
+                        <table>
+                            <thead>
+                            <tr >
+                                <th>&nbsp;Name</th>
+                                <th>Measurement</th>
+                                <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {fooditems.map((foodItem) => (
+                                <tr onClick={() => (console.log('helloworld'))} className="addItem" key={foodItem.id}>
+
+                                    <td>&nbsp;{foodItem.name}</td>
+                                    <td>&nbsp;{foodItem.measurement}</td>
+
+                                    <td>
+
+                                        <button className='Add' onClick={() => handleClickAddItem(foodItem.id)}>Add
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <button className="Add" onClick={onClose}>New Food Item</button>
+                </div>
             </div>
         </div>
     );

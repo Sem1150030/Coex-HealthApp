@@ -42,6 +42,7 @@ import PieChart from "../Charts/PieChart.jsx";
                 <div className='detailsheader'>
                     <h1 className="detailheadertitle">{foodItem.foodItem.name}</h1>
                     <button className='closeButton' onClick={onClose}>X</button>
+
                 </div>
                 <br/>
                 <hr/>
@@ -56,37 +57,37 @@ import PieChart from "../Charts/PieChart.jsx";
 
                     <div className='nutrition'>
                         <table style={{borderCollapse: 'collapse', width: '100%'}}>
-                            <tbody>
-                            <tr>
-                                <td className='id' style={{border: '1px solid black', padding: '8px'}}>Kcal:</td>
-                                <td style={{
-                                    border: '1px solid black',
-                                    padding: '8px'
-                                }}>{foodItem.foodItem.kcalAmount}</td>
-                            </tr>
-                            <tr>
-                                <td className='id' style={{border: '1px solid black', padding: '8px'}}>Protein:</td>
-                                <td style={{
-                                    border: '1px solid black',
-                                    padding: '8px'
-                                }}>{foodItem.foodItem.proteinAmount}gr
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className='id' style={{border: '1px solid black', padding: '8px'}}>Carbs:</td>
-                                <td style={{border: '1px solid black', padding: '8px'}}>30gr</td>
-                            </tr>
-                            <tr>
-                                <td className='id' style={{border: '1px solid black', padding: '8px'}}>Fat:</td>
-                                <td style={{border: '1px solid black', padding: '8px'}}>24gr</td>
-                            </tr>
-                            <tr>
-                                <td className='id' style={{border: '1px solid black', padding: '8px'}}>Measurement:</td>
-                                <td style={{
-                                    border: '1px solid black',
-                                    padding: '8px'
-                                }}>{foodItem.foodItem.measurement}</td>
-                            </tr>
+                            <tbody className='nutrtiontb'>
+                                <tr>
+                                    <td className='id' style={{border: '1px solid black', padding: '8px'}}>Kcal:</td>
+                                    <td style={{
+                                        border: '1px solid black',
+                                        padding: '8px'
+                                    }}>{foodItem.foodItem.kcalAmount}</td>
+                                </tr>
+                                <tr>
+                                    <td className='id' style={{border: '1px solid black', padding: '8px'}}>Protein:</td>
+                                    <td style={{
+                                        border: '1px solid black',
+                                        padding: '8px'
+                                    }}>{foodItem.foodItem.proteinAmount}gr
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className='id' style={{border: '1px solid black', padding: '8px'}}>Carbs:</td>
+                                    <td style={{border: '1px solid black', padding: '8px'}}>30gr</td>
+                                </tr>
+                                <tr>
+                                    <td className='id' style={{border: '1px solid black', padding: '8px'}}>Fat:</td>
+                                    <td style={{border: '1px solid black', padding: '8px'}}>24gr</td>
+                                </tr>
+                                <tr>
+                                    <td className='id' style={{border: '1px solid black', padding: '8px'}}>Measurement:</td>
+                                    <td style={{
+                                        border: '1px solid black',
+                                        padding: '8px'
+                                    }}>{foodItem.foodItem.measurement}</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -108,7 +109,7 @@ import PieChart from "../Charts/PieChart.jsx";
 FoodItemDetails.propTypes = {
     isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
-    foodItem: PropTypes.object.isRequired,
+    foodItem: PropTypes.object,
 };
 export default FoodItemDetails;
 
