@@ -1,4 +1,6 @@
-﻿using HealthApp_Backend.Repositories;
+﻿using HealthApp_Backend.Models.Dto;
+using HealthApp_Backend.Repositories;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +9,9 @@ using Tracks.API.Models.DTO;
 namespace HealthApp_Backend.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("AllowSpecificOrigin")]
     [ApiController]
+    
     public class AuthController : ControllerBase
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -21,25 +25,36 @@ namespace HealthApp_Backend.Controllers
 
 
         [HttpPost]
-        [Route("Register")]
+        [Route("signup")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto registerRequestDto)
         {
+            var registerRequestRolesDto = new RegisterRequestRolesDto()
+            {
+                Username = registerRequestDto.Username,
+                Password = registerRequestDto.Password,
+                Roles = ["Reader"]
+            };
+            
+            
             var identityUser = new IdentityUser
             {
-                UserName = registerRequestDto.Username,
-                Email = registerRequestDto.Username
+                UserName = registerRequestRolesDto.Username,
+                Email = registerRequestRolesDto.Username
             };
 
             var identityResult = await userManager.CreateAsync(identityUser, registerRequestDto.Password);
             if (identityResult.Succeeded)
             {
-                if (registerRequestDto.Roles != null && registerRequestDto.Roles.Any())
+                if (registerRequestRolesDto.Roles != null && registerRequestRolesDto.Roles.Any())
                 {
-                    identityResult = await userManager.AddToRolesAsync(identityUser, registerRequestDto.Roles);
+                    identityResult = await userManager.AddToRolesAsync(identityUser, registerRequestRolesDto.Roles);
 
                     if (identityResult.Succeeded)
+
                     {
-                        return Ok("User was registered! Please Login");
+                        
+                        
+                        return Ok(identityResult);
                     }
                         
                 }
@@ -49,7 +64,7 @@ namespace HealthApp_Backend.Controllers
         }
 
         [HttpPost]
-        [Route("Login")]
+        [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequestDto)
         {
             var user = await userManager.FindByEmailAsync(loginRequestDto.Username);

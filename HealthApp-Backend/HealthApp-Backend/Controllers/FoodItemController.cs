@@ -4,12 +4,14 @@ using HealthApp_Backend.Models.DomainModels;
 using HealthApp_Backend.Models.Dto;
 using HealthApp_Backend.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthApp_Backend.Controllers;
 
 [ApiController]
 [Authorize]
+[EnableCors("AllowSpecificOrigin")]
 [Route("[controller]")]
 public class FoodItemController : Controller
 {
@@ -63,11 +65,9 @@ public class FoodItemController : Controller
     }
 
     [HttpPost]
-    
     public async Task<IActionResult> CreateFoodItem([FromBody] CreateFoodItemDto foodItemDto)
     {
         var shoppingListFoodItems = new List<ShoppingListFoodItem>();
-        
         var shoppingListFoodItemDtos = mapper.Map<List<ShoppingListFoodItemDto>>(shoppingListFoodItems);
         
         var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

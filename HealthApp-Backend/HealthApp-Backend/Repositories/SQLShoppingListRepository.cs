@@ -36,8 +36,9 @@ public class SQLShoppingListRepository: IShoppingListrepository
         await dbContext.ShoppingListFoodItems.AddAsync(shoppingListFoodItem);
         await dbContext.SaveChangesAsync();
         return shoppingListFoodItem;
-
     }
+    
+    
 
     public async Task<ShoppingList> GetShoppingListByUIDAndDateAsync(Guid userId, DateTime date)
     {
@@ -62,5 +63,33 @@ public class SQLShoppingListRepository: IShoppingListrepository
             return createShoppingList;
         }
         return shoppingList;
+    }
+
+    public async Task<ShoppingList?> updateShoppingListAsync(int newKcal, float newProtein, Guid userId, DateTime date)
+    {
+        var currentShoppingList = await dbContext.ShoppingLists.Include(sl => sl.ShoppingListFoodItems)
+            .ThenInclude(slfi => slfi.FoodItem).FirstOrDefaultAsync(x => x.UserId == userId && x.CreatedOn == date);
+
+        if (currentShoppingList == null)
+        {
+            return null;
+        }
+        
+        currentShoppingList.kcalCurrent = newKcal;
+        currentShoppingList.proteinCurrent = newProtein;
+        await dbContext.SaveChangesAsync();
+        return currentShoppingList;
+    }
+
+    public async Task<ShoppingListFoodItem?> deleteItemFromShoppingListAsync(Guid shoppingListFoodItemId)
+    {
+        var checkIfItemExists = await dbContext.ShoppingListFoodItems.FirstOrDefaultAsync(x => x.Id == shoppingListFoodItemId);
+        if(checkIfItemExists == null)
+        {
+            return null;
+        }
+        dbContext.ShoppingListFoodItems.Remove(checkIfItemExists);
+        await dbContext.SaveChangesAsync();
+        return checkIfItemExists;
     }
 }

@@ -4,12 +4,14 @@ using HealthApp_Backend.Models.DomainModels;
 using HealthApp_Backend.Models.Dto;
 using HealthApp_Backend.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthApp_Backend.Controllers;
 
 [ApiController]
 [Authorize]
+[EnableCors("AllowSpecificOrigin")]
 [Route("[controller]")]
 public class ShoppingListController : Controller
 {
@@ -68,6 +70,7 @@ public class ShoppingListController : Controller
         var todaysDate = DateTime.Now.Date;
         
         var shoppingList = await iShoppingListrepository.GetShoppingListByUIDAndDateAsync(userId, todaysDate);
+        var foodItem = await foodItemRepository.GetFoodItemByIdAsync(shoppingListFoodItemRequestDto.FoodItemId, userId);
         Guid shoppingListId = shoppingList.Id;
         
         var shoppingListFoodItem = new ShoppingListFoodItem
@@ -78,8 +81,58 @@ public class ShoppingListController : Controller
         };
 
         await iShoppingListrepository.AddItemToShoppingListAsync(shoppingListFoodItem, todaysDate);
+        var currentKcal = shoppingList.kcalCurrent;
+        var currentProtein = shoppingList.proteinCurrent;
+        
+        
+        var newKcal = currentKcal + foodItem.kcalAmount;
+        var newProtein = currentProtein + foodItem.proteinAmount;
+        
+        var itemsChanged = await iShoppingListrepository.updateShoppingListAsync(newKcal, newProtein, userId, todaysDate);
+        if (itemsChanged == null)
+        {
+            return NotFound("Something went wrong edditing the shopping list");
+        }
+
+        
         return Ok("Added item to shopping list");
     }
+
+
+    
+    [HttpDelete]
+    [Route("DeleteItem/{id:Guid}/{foodItemId:Guid}")]
+    public async Task<IActionResult> DeleteItemFromShoppingList(Guid id, Guid foodItemId)
+    {
+        var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdString == null)
+        {
+            return NotFound("User not found");
+        }
+        var shoppingList = await iShoppingListrepository.GetShoppingListByUIDAndDateAsync(Guid.Parse(userIdString), DateTime.Now.Date);
+        var foodItem = await foodItemRepository.GetFoodItemByIdAsync(foodItemId, Guid.Parse(userIdString));
+        
+        var newKcal = shoppingList.kcalCurrent - foodItem.kcalAmount;
+        var newProtein = shoppingList.proteinCurrent - foodItem.proteinAmount;
+        var result = await iShoppingListrepository.deleteItemFromShoppingListAsync(id);
+        if(result == null)
+        {
+            return NotFound("Item not found");
+        }
+        
+        var itemsChanged = await iShoppingListrepository.updateShoppingListAsync(newKcal, newProtein, Guid.Parse(userIdString), DateTime.Now.Date);
+        if (itemsChanged == null)
+        {
+            return NotFound("Something went wrong edditing the shopping list");
+        }
+        
+        
+        
+        return Ok("Item deleted from shopping list");
+    }
+    
+    
+    
     
     [HttpGet]
     [Route("User")]
@@ -96,6 +149,7 @@ public class ShoppingListController : Controller
         
         var shoppingListItems = await iShoppingListrepository.GetShoppingListByUIDAndDateAsync(userId, todaysDate);
         var shoppingListDtos = mapper.Map<ShoppingListReturnDto>(shoppingListItems);
+        
         
         return Ok(shoppingListDtos);
     }

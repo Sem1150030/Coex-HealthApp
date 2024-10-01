@@ -2,5 +2,6 @@
 
 public class SignupRequestReturnDto
 {
-    
+    public string response { get; set; }
+
 }
