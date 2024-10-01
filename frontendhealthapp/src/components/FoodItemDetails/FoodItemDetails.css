@@ -1,0 +1,134 @@
+/* FoodItemModal.css */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Make sure it's above other content */
+}
+
+/* Add this to AddItemToShoppinglist.css */
+.no-scroll {
+    overflow: hidden;
+}
+
+
+.modal-content {
+    background: #95B7DF;
+    padding: 20px;
+    border-radius: 5px;
+    width: 600px;
+    height: 750px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+.modal-content button {
+    margin-top: 10px;
+
+}
+
+.closeButton {
+    position: absolute;
+    right: 5px; /* Position the close button on the right */
+    top: -30px; /* Add some spacing from the top */
+    background: #978484; /* Make the button stand out */
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.removeitem{
+    background-color: #e44545; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 100px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.removeitem:hover {
+    background-color: #ff0000;
+}
+
+
+
+.removeitem:active {
+    background-color: #cd5353; /* Even darker color when clicked */
+}
+
+
+.closeButton:hover {
+    background-color: #e54141;
+}
+
+
+
+.closeButton:active {
+    background-color: #cd5353; /* Even darker color when clicked */
+}
+td {
+    font-weight: bold;
+    font-size: 17px;
+
+}
+
+.id  {
+    font-weight: normal;
+    font-size: 17px;
+
+}
+
+
+
+.detailsheader {
+    display: flex;
+    justify-content: space-between; /* This will create space between the title and the close button */
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative; /* This allows the button to be positioned absolutely */
+    margin-top: 20px;
+}
+
+.detailheadertitle {
+    position: absolute;
+
+    left: 50%; /* Position title in the middle horizontally */
+    transform: translateX(-50%); /* Center the title by offsetting it by 50% of its width */
+}
+
+.block {
+    display: block;
+}
+
+.imageAdd {
+    margin-left: 60%;
+    border-color: black;
+    border-width: 1px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0);
+    cursor: pointer;
+}
+
+
+
+@media screen and (max-width: 600px) {
+    .imageAdd {
+        margin-left: 49%;
+    }
+
+}

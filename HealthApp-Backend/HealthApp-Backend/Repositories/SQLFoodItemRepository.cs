@@ -27,8 +27,14 @@ public class SQLFoodItemRepository: IFoodItemRepository
         return foodItem;
     }
 
-    public async Task<FoodItem?> GetFoodItemByIdAsync(Guid id)
+    public async Task<FoodItem?> GetFoodItemByIdAsync(Guid id, Guid userId)
     {
-        return await dbContext.FoodItems.FirstOrDefaultAsync(x => x.Id == id);
+        return await dbContext.FoodItems.FirstOrDefaultAsync(x => x.Id == id && x.userId == userId);
+    }
+
+    public async Task<List<FoodItem>> GetAllFoodItemsByUIDAsync(Guid userId)
+    {
+        return await dbContext.FoodItems.Where(x => x.userId == userId).ToListAsync();
+
     }
 }

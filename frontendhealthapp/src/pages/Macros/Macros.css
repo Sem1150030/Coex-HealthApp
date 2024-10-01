@@ -1,0 +1,156 @@
+.containerMacros {
+  text-align: center;
+  width: 680px;
+  height: 720px;
+  background-color: #95B7DF;
+  box-shadow: 6px 6px 5px 5px gray;
+  border-radius: 20px;
+}
+
+.containerShoppinglistMacros {
+  text-align: center;
+  width: 680px;
+  height: fit-content;
+  background-color: #95B7DF;
+  box-shadow: 6px 6px 5px 5px gray;
+  border-radius: 20px;
+  padding-bottom: 50px;
+}
+
+.container {
+  padding-top: 80px;
+  padding-bottom: 20px;
+  display: flex;              /* Enable Flexbox */
+  justify-content: center;    /* Center horizontally */
+  align-items: center;        /* Center vertically */
+}
+
+.titlecontainer {
+  width: 100%;
+  margin-left: 40px;
+  margin-top: -20px;
+  display: flex;
+
+}
+
+.Dashboarddatacontainer{
+  display: flex;
+  justify-content: center;
+
+}
+
+
+
+.shoppingListItemContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Adds spacing between items */
+
+
+}
+
+.shoppingListItemContainer .arrayItems  {
+  border: 1px solid black;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 80%;
+  margin: 0 auto; /* Centering */
+  border-radius: 25px;
+  align-items: center;
+}
+
+
+
+.arrayItems{
+  display: flex;
+}
+
+.foodMeasurement{
+  color: #524848;
+  font-size: 13px;
+}
+
+.kcalAmount {
+  margin-left: 53%;
+  border: 1px solid black;
+  padding-left: 20px;
+  border-radius: 25px;
+  width: 25%;
+  padding: 5px;
+  background-color: #7EAADE;
+  font-weight: bold;
+}
+
+.foodNameContainer {
+  justify-content: left;
+  text-align: left;
+  width: 30%;
+  margin-left: 10px;
+}
+
+.title{
+  font-size: 55px; /* Adjust size as needed */
+  background: linear-gradient(to right, #4CD2C3, #1C63B4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.foodName {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.dashboard{
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+h2.dashboard{
+  font-size: 30px;
+  margin-top: -20px;
+}
+
+p.dashboard{
+  font-size: 20px;
+}
+
+p.information {
+  color: #524848;
+}
+
+.button-like {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.kcalAmount button-like{
+  justify-content: center;
+    align-items: center;
+}
+
+.button-like:hover {
+  background-color: #5394dd;
+}
+
+.button-like:active {
+  background-color: #6399db; /* Even darker color when clicked */
+}
+
+hr {
+  border: none;          /* Remove default border */
+  height: 2px;          /* Set the height of the line */
+  background-color: #79a8de; /* Set background color to white */
+
+}
+
+.imageAdd:hover {
+  background-color: #5394dd;
+  transform: scale(1.1);
+}
+
+.imageAdd:active {
+  background-color: #6399db; /* Even darker color when clicked */
+}
+
+
