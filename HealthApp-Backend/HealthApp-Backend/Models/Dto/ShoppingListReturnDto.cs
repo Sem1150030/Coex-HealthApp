@@ -7,8 +7,13 @@ public class ShoppingListReturnDto
     public List<ShoppingListFoodItemDto> ShoppingListFoodItems { get; set; }
     public Guid UserId { get; set; }
     public int KcalGoal { get; set; }
-    public int ProteinGoal { get; set; }
-    public bool KcalMax { get; set; }
-    public float ProteinCurrent { get; set; }
-    public int KcalCurrent { get; set; }
+    public int proteinGoal { get; set; }
+    public int carbGoal { get; set; }
+    public int fatGoal { get; set; }
+    public bool kcalMax { get; set; }
+    
+    public float proteinCurrent { get; set; }
+    public int kcalCurrent { get; set; }
+    public int carbCurrent { get; set; }
+    public int fatCurrent { get; set; }
 }

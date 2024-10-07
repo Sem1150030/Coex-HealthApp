@@ -87,8 +87,10 @@ public class ShoppingListController : Controller
         
         var newKcal = currentKcal + foodItem.kcalAmount;
         var newProtein = currentProtein + foodItem.proteinAmount;
+        var newFat = shoppingList.fatCurrent + foodItem.fatAmount;
+        var newCarb = shoppingList.carbCurrent + foodItem.carbAmount;
         
-        var itemsChanged = await iShoppingListrepository.updateShoppingListAsync(newKcal, newProtein, userId, todaysDate);
+        var itemsChanged = await iShoppingListrepository.updateShoppingListAsync(newKcal, newProtein, newFat, newCarb ,userId, todaysDate);
         if (itemsChanged == null)
         {
             return NotFound("Something went wrong edditing the shopping list");
@@ -114,13 +116,15 @@ public class ShoppingListController : Controller
         
         var newKcal = shoppingList.kcalCurrent - foodItem.kcalAmount;
         var newProtein = shoppingList.proteinCurrent - foodItem.proteinAmount;
+        var newFat = shoppingList.fatCurrent + foodItem.fatAmount;
+        var newCarb = shoppingList.carbCurrent + foodItem.carbAmount;
         var result = await iShoppingListrepository.deleteItemFromShoppingListAsync(id);
         if(result == null)
         {
             return NotFound("Item not found");
         }
         
-        var itemsChanged = await iShoppingListrepository.updateShoppingListAsync(newKcal, newProtein, Guid.Parse(userIdString), DateTime.Now.Date);
+        var itemsChanged = await iShoppingListrepository.updateShoppingListAsync(newKcal, newProtein, newFat,newCarb ,Guid.Parse(userIdString), DateTime.Now.Date);
         if (itemsChanged == null)
         {
             return NotFound("Something went wrong edditing the shopping list");

@@ -7,4 +7,6 @@ public class FoodItemDto
     public int KcalAmount { get; set; }
     public float ProteinAmount { get; set; }
     public string Measurement { get; set; }
+    public float fatAmount { get; set; }
+    public float carbAmount { get; set; }
 }

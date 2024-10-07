@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
-        policyBuilder => policyBuilder.WithOrigins("http://localhost:5173")
+        policyBuilder => policyBuilder.WithOrigins("http://localhost:5173", "http://192.168.178.129:5173")
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
@@ -62,6 +62,7 @@ builder.Services.AddDbContext<HealthAppAuthDbContext>(options =>
 builder.Services.AddScoped<IShoppingListrepository, SQLShoppingListRepository>();
 builder.Services.AddScoped<IFoodItemRepository, SQLFoodItemRepository>();
 builder.Services.AddScoped<ITokenRepository,  TokenRepository>();
+builder.Services.AddScoped<IWeightRepository,  SQLWeightRepository>();
 
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));

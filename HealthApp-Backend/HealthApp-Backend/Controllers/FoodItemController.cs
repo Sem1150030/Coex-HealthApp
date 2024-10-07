@@ -92,7 +92,7 @@ public class FoodItemController : Controller
         
         
         await foodItemRepository.CreateFoodItemAsync(foodItem);
-        return Ok("Food item created");
+        return Ok(foodItem);
     }
     
 } 
