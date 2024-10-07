@@ -3,11 +3,21 @@
 import {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import './AddItemToShoppinglist.css'
+import CreateNewFoodItem from "../CreateNewFoodItem/CreateNewFoodItem.jsx";
 
 function AddItemToShoppinglist({ isOpen, onClose }) {
     const [loading, setLoading] = useState(true); // Add loading state
     const [error, setError] = useState(null); // Add error state
     const [fooditems, setFooditems] = useState([{}]); // Add error state
+    const [isCreateFoodItemOpen, SetisCreateFoodItemOpen] = useState(false);
+
+    function handleClickCreateItem(){
+        SetisCreateFoodItemOpen(true);
+    }
+
+    function closeCreateItem(){
+        SetisCreateFoodItemOpen(false);
+    }
 
     useEffect(() => {
 
@@ -22,7 +32,11 @@ function AddItemToShoppinglist({ isOpen, onClose }) {
             }
 
             try {
-                const response = await fetch('http://localhost:5155/Fooditem/User', {
+                // const response = await fetch('http://localhost:5155/Fooditem/User',
+                const response = await fetch('http://192.168.178.129:8001/Fooditem/User',
+
+
+                    {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -48,6 +62,9 @@ function AddItemToShoppinglist({ isOpen, onClose }) {
 
         fetchData();
 
+    }, []);
+
+    useEffect(() => {
         if (isOpen) {
             document.body.classList.add('no-scroll'); // Hide scrollbar when modal is open
         } else {
@@ -58,6 +75,7 @@ function AddItemToShoppinglist({ isOpen, onClose }) {
         return () => {
             document.body.classList.remove('no-scroll');
         };
+
     }, [isOpen]);
 
 
@@ -80,7 +98,9 @@ function AddItemToShoppinglist({ isOpen, onClose }) {
         const jwtToken = localStorage.getItem('token')
 
         try {
-            const res = await fetch('http://localhost:5155/ShoppingList/AddItem', {
+            // const res = await fetch('http://localhost:5155/ShoppingList/AddItem',
+            const res = await fetch('http://192.168.178.129:8001/ShoppingList/AddItem',
+                {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -104,8 +124,10 @@ function AddItemToShoppinglist({ isOpen, onClose }) {
         <div className="modal-overlay" onClick={onClose}>
             <div>
                 <div className="modal-content" onClick={e => e.stopPropagation()}>
-                    <h1>Add item</h1>
-                    <button className='closeButton' onClick={onClose}>X</button>
+                    <div className='detailsheader'>
+                        <h1 className="detailheadertitle">Add item</h1>
+                        <button className='closeButton' onClick={onClose}>X</button>
+                    </div>
                     <br/>
                     <hr/>
                     <br/>
@@ -135,9 +157,11 @@ function AddItemToShoppinglist({ isOpen, onClose }) {
                             </tbody>
                         </table>
                     </div>
-                    <button className="Add" onClick={onClose}>New Food Item</button>
+                    <button className="Add" onClick={handleClickCreateItem}>New Food Item</button>
                 </div>
             </div>
+
+            <CreateNewFoodItem isOpenCreate={isCreateFoodItemOpen} OnCloseCreate={closeCreateItem} />
         </div>
     );
 };

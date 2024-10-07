@@ -22,7 +22,8 @@ export default function Macros() {
             }
 
             try {
-                const response = await fetch('http://localhost:5155/ShoppingList/User', {
+                // const response = await fetch('http://localhost:5155/ShoppingList/User',
+                const response = await fetch('http://192.168.178.129:8001/ShoppingList/User',{
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`,

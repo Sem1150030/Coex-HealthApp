@@ -37,7 +37,7 @@
 .actions a {
     text-decoration: none;
     background-color: transparent;
-    color: lightgray;
+    color: #000000;
 }
 
 .actions button:hover {

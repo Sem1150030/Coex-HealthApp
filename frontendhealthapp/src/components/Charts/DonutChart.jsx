@@ -11,7 +11,10 @@ const DonutChart = ({dataProp}) => {
     // Define the chart data
     const kcalConsumed = dataProp.kcalCurrent;
     const kcalGoal = dataProp.kcalGoal;
-    const kcalLeft = kcalGoal - kcalConsumed;
+    let kcalLeft = kcalGoal - kcalConsumed;
+    if (kcalLeft < 0) {
+        kcalLeft = 0;
+    }
 
     const data = {
         labels: ['Kcal Consumed', 'Kcal left'],

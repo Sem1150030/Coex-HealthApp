@@ -109,6 +109,43 @@ td {
     transform: translateX(-50%); /* Center the title by offsetting it by 50% of its width */
 }
 
+.chart-container {
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.chart-wrapper {
+    position: relative;
+    height: 300px;
+}
+
+/* Custom styles for the legend */
+.chartjs-legend ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+}
+
+.chartjs-legend li {
+    display: inline-block;
+    margin: 0 10px;
+    font-size: 14px;
+    align-items: center;
+}
+
+/* Ensure the point style (marker) in the legend is displayed */
+.chartjs-legend li span {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    margin-right: 5px;
+    border-radius: 50%;
+}
+
+
+
 .block {
     display: block;
 }
@@ -130,5 +167,89 @@ td {
     .imageAdd {
         margin-left: 49%;
     }
+
+
+
+}
+
+
+@media screen and (max-width: 500px) {
+    .imageAdd {
+        margin-left: 36%;
+    }
+
+    .modal-content {
+        background: #95B7DF;
+        padding: 20px;
+        border-radius: 5px;
+        width: 75%;
+        height: 600px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .detailheadertitle {
+       font-size: 18px;
+    }
+    .detailsheader {
+        width: 100%;
+        display: inline-flex;
+    }
+
+    .closeButton {
+        width: 30px;
+        height: 30px;
+    }
+    .Nutritional{
+        font-size: 15px;
+    }
+
+    .chart-container {
+        width: 70%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .chart-wrapper {
+        position: relative;
+        height: 200px;
+    }
+
+    /* Custom styles for the legend */
+    .chartjs-legend ul {
+        display: flex;
+        justify-content: center;
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .chartjs-legend li {
+        display: inline-block;
+        margin: 0 10px;
+        font-size: 14px;
+        align-items: center;
+    }
+
+    /* Ensure the point style (marker) in the legend is displayed */
+    .chartjs-legend li span {
+        width: 12px;
+        height: 12px;
+        display: inline-block;
+        margin-right: 5px;
+        border-radius: 50%;
+    }
+
+    .removeitem{
+        background-color: #e44545; /* Green */
+        border: none;
+        color: white;
+        padding: 10px 60px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+
 
 }

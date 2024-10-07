@@ -10,6 +10,14 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        policyBuilder => policyBuilder.WithOrigins("http://localhost:5173", "http://192.168.178.129:5173")
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -54,6 +62,7 @@ builder.Services.AddDbContext<HealthAppAuthDbContext>(options =>
 builder.Services.AddScoped<IShoppingListrepository, SQLShoppingListRepository>();
 builder.Services.AddScoped<IFoodItemRepository, SQLFoodItemRepository>();
 builder.Services.AddScoped<ITokenRepository,  TokenRepository>();
+builder.Services.AddScoped<IWeightRepository,  SQLWeightRepository>();
 
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
@@ -95,6 +104,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowSpecificOrigin");
 
 app.UseAuthorization();
 

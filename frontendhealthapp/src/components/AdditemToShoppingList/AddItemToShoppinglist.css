@@ -17,6 +17,10 @@ thead {
     font-weight: normal;
 }
 
+.no-scroll {
+    overflow: hidden !important; /* Add important to ensure it overrides other styles */
+}
+
 th, td {
     padding: 8px 12px;
     text-align: left;
@@ -43,7 +47,9 @@ th, td {
     display: flex;
 }
 
-
+.foodicon {
+    padding-bottom: 10px;
+}
 
 .foodMeasurement{
     color: #524848;
@@ -51,12 +57,13 @@ th, td {
 }
 
 .kcalAmount {
-    margin-left: 53%;
+    margin-left: 38%;
     border: 1px solid black;
-    padding-left: 20px;
+
     border-radius: 25px;
     width: 25%;
     padding: 5px;
+    padding-right: 10px;
     background-color: #7EAADE;
     font-weight: bold;
 }
