@@ -1,0 +1,36 @@
+.linechartContainer {
+    padding-top: 20px;
+    padding-bottom: 40px;
+    width: 60%;
+    height: 60%;
+    margin: 0 auto;
+    background-color: #95B7DF;
+    border-radius: 25px;
+    text-align: center;
+}
+
+/* styles.css */
+.chart-container-line {
+    width: 100%; /* Set the desired width */
+    height: 400px; /* Set the desired height */
+    margin: 0 auto; /* Center the chart horizontally */
+    background-color: #ffffff;
+    border-radius: 25px;
+}
+
+@media screen and (max-width: 500px) {
+    .linechartContainer {
+        width: 100%;
+        height: 50vh; /* Increase the height on small screens */
+        margin: 0 auto;
+        background-color: #95B7DF;
+        justify-content: center;
+    }
+
+    .chart-container-line {
+        width: 93%; /* Keep width almost full */
+        height: 70%; /* Set height to 70% of the viewport height */
+        margin: 0 auto; /* Center the chart horizontally */
+
+    }
+}
