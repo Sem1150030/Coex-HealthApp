@@ -11,10 +11,24 @@ function ShoppingList({ data  }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedFoodItem, setSelectedFoodItem] = useState(null);
     const [isAddItemOpen, setisAddItemOpen] = useState(false);
+    useEffect(() => {
+        if (isAddItemOpen || isModalOpen) {
+            document.body.classList.add('no-scroll'); // Hide scrollbar when modal is open
+        } else {
+            document.body.classList.remove('no-scroll'); // Restore scrollbar when modal is closed
+        }
+
+        // Cleanup on component unmount or when modal closes
+        return () => {
+            document.body.classList.remove('no-scroll');
+        };
+
+    }, [isAddItemOpen, isModalOpen]);
 
 
     useEffect(() => {
-        console.log(data); // Will log only when data changes
+        console.log(data);
+        data.sort()// Will log only when data changes
     }, [data]);
 
     function handleClick(foodItem) {
@@ -54,6 +68,7 @@ function ShoppingList({ data  }) {
             <hr/>
             <br/>
             <div className="shoppingListItemContainer">
+
                 {data.map((foodItem) => {
                     return (
                         <div className="arrayItems" key={foodItem.id}>

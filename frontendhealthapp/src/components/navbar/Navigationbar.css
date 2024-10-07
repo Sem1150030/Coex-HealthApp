@@ -7,32 +7,81 @@ ul {
     margin: 0;
     padding: 0;
     list-style: none;
-    display: flex;  /*  items naast elkaar */
+    display: flex;  /* items next to each other */
     width: 100%;
     background-color: #3D3F51;
-    justify-content: center; /*  Horizontally */
-    align-items: center;     /*  vertically */
-    height: 50px;           /*  Height of the navbar */
+    justify-content: space-between; /* Align items at extremes (left and right) */
+    align-items: center;     /* Center vertically */
+    height: 50px;            /* Height of the navbar */
     position: fixed;
+    top: 0;                 /* Ensures it stays at the top */
+    left: 0;
     z-index: 1000;
 }
 
 li {
-    margin: 70px;
+    margin: 0 70px; /* Adjusted margin for balanced spacing */
 }
 
-a{
+a {
     text-decoration: none;
     color: white;
 }
+
 .active {
     font-weight: 700; /* This makes the text extra bold */
 }
 
-Link {
+button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
     text-decoration: none;
+    color: white;
+    font-size: 15px;
 }
 
-.alignRight {
+/* Align Settings to the left */
+.settingsButton {
+    margin-left: 3%;
+    margin-right: auto;
+}
+
+/* Align Sign Out to the right */
+.logoutButton {
     margin-left: auto;
+    margin-right: 3%;
+}
+
+/* Center the middle items */
+.centerItems {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1; /* Ensures that the center section occupies the space between left and right */
+}
+
+/* Ensure the navbar covers the viewport's entire width */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@media (max-width: 800px) {
+    ul {
+        height: auto;
+        flex-wrap: wrap;
+    }
+    li {
+        margin: 15px;
+    }
+
+    ul {
+        font-size: 12px;
+    }
 }

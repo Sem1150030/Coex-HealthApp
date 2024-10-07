@@ -1,0 +1,62 @@
+.CreateInputContainer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+}
+
+.CreateInputForm {
+    width: 70%;
+    position: relative;
+
+}
+
+.CreateInput{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+    border-width: 2px;
+    border-color: #2162A3;
+}
+
+
+
+.CreateInputNumber {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: #2162A3;
+
+
+
+}
+
+
+/*!* Add this to AddItemToShoppinglist.css *!*/
+.no-scroll {
+    overflow: hidden;
+}
+
+
+.modal-overlay-Create {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Make sure it's above other content */
+}

@@ -15,7 +15,9 @@ import PieChart from "../Charts/PieChart.jsx";
          const jwtToken = localStorage.getItem('token')
 
          try {
-             const res = await fetch('http://localhost:5155/ShoppingList/DeleteItem/' + foodItemId + "/" + foodId, {
+             // const res = await fetch('http://localhost:5155/ShoppingList/DeleteItem/' + foodItemId + "/" + foodId,
+             const res = await fetch('http://192.168.178.129:8001/ShoppingList/DeleteItem/' + foodItemId + "/" + foodId,
+                 {
                  method: 'DELETE',
                  headers: {
                      'Content-Type': 'application/json',
@@ -91,8 +93,8 @@ import PieChart from "../Charts/PieChart.jsx";
                             </tbody>
                         </table>
                     </div>
-                    <br/>
-                    <br/>
+                    {/*<br/>*/}
+                    {/*<br/>*/}
 
                     <div className='block'>
                         <button className='removeitem'

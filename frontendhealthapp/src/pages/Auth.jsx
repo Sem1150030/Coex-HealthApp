@@ -25,7 +25,10 @@ export async function action({request}) {
         password: data.get('password')
     };
 
-    const  response = await fetch('http://localhost:5155/api/Auth/' + mode, {
+    // const  response = await fetch('http://localhost:5155/api/Auth/' + mode,
+    const response = await fetch('http://192.168.178.129:8001/api/Auth/' + mode,
+
+    {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -61,9 +64,12 @@ export async function action({request}) {
     const token = resData.jwtToken;
 
     localStorage.setItem('token', token);
+    const expiration = new Date();
+    expiration.setHours(expiration.getHours() + 5);
+    localStorage.setItem('expiration', expiration.toISOString());
 
     if (mode === 'login') {
-        return redirect('/');
+        return redirect('/macros');
     }
 
     if (mode === 'signup') {
