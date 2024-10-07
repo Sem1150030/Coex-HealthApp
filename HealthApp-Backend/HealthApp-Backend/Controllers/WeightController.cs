@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using AutoMapper;
+using HealthApp_Backend.Models.Dto;
 using HealthApp_Backend.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
@@ -49,6 +50,20 @@ public class WeightController : Controller
             }
             
             var weightData = await weightTrackerRepository.getWeightDataTodayAsync(Guid.Parse(userIdString), DateTime.Now.Date);
+            return Ok(weightData);
+        }
+        
+        [HttpPut]
+        [Route("/UpdateWeightData")]
+        public async Task<IActionResult> UpdateWeightData([FromBody] WeightRequestDto weightRequestDto)
+        {
+            var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userIdString == null)
+            {
+                return NotFound("User not found");
+            }
+            
+            var weightData = await weightTrackerRepository.updateWeightDataAsync(Guid.Parse(userIdString), DateTime.Now.Date, weightRequestDto);
             return Ok(weightData);
         }
 }

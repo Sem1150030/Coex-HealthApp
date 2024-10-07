@@ -1,5 +1,6 @@
 ﻿using HealthApp_Backend.Data;
 using HealthApp_Backend.Models.DomainModels;
+using HealthApp_Backend.Models.Dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace HealthApp_Backend.Repositories;
@@ -60,5 +61,14 @@ public class SQLWeightRepository: IWeightRepository
         }
 
         return data;
+    }
+
+    public async Task<WeightTracker> updateWeightDataAsync(Guid userId, DateTime date, WeightRequestDto weightRequestDto)
+    {
+        var weightDataOfToday = await getWeightDataTodayAsync(userId, DateTime.Now.Date);
+        weightDataOfToday.WeightGoal = weightRequestDto.WeightGoal;
+        weightDataOfToday.Weight = weightRequestDto.Weight;
+        await dbContext.SaveChangesAsync();
+        return weightDataOfToday;
     }
 }

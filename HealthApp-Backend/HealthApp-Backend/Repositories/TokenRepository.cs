@@ -33,7 +33,7 @@ namespace HealthApp_Backend.Repositories
                 configuration["Jwt:Issuer"],
                 configuration["Jwt:Audience"],
                 claims,
-                expires: DateTime.Now.AddMinutes(300),
+                expires: DateTime.Now.AddMinutes(400),
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
