@@ -1,6 +1,7 @@
 import LineChart from "../../components/Charts/LineChart.jsx";
 import './Weight.css';
 import {useEffect, useState} from "react";
+import {func} from "prop-types";
 
 export default function Weight() {
 
@@ -9,16 +10,8 @@ export default function Weight() {
     const [error, setError] = useState(null); // Add error state
     const [filter, setFilter] = useState('week');
 
-    function setFilterToMonth() {
-        setFilter('month');
-    }
-
-    function setFilterToWeek() {
-        setFilter('year');
-    }
-
-    function setFilterToYear() {
-        setFilter('week');
+    function handleFilterChange(event) {
+        setFilter(event.target.value);
     }
 
     useEffect(() => {
@@ -68,11 +61,21 @@ export default function Weight() {
     return (
         <div>
             <div className='container'>
+
+
                 <h1 className='title'>Weight</h1>
             </div>
 
             <div className="linechartContainer">
-                <LineChart filter={ filter } dataProp={data}  />
+                <div className="linechartContainer">
+                    <select value={filter} onChange={handleFilterChange}>
+                        <option value="week">Week</option>
+                        <option value="month">Month</option>
+                        <option value="year">Year</option>
+                    </select>
+
+                    <LineChart filter={filter} dataProp={data} todaysData={{"date": "2024-10-07T00:00:00"}}/>
+                </div>
             </div>
         </div>
     );
