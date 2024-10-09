@@ -46,26 +46,30 @@ const LineChart = ({ filter, dataProp, todaysData }) => {
     function handleWeekFilter(){
         const weekNumber = getWeekNumber(new Date());
         const datesInTheWeek = getDateOfISOWeek(weekNumber, new Date().getFullYear())
+
         var dataList = []
 
-        dataProp.map((item) => {
-
-            let datespliced = item.date.split("T")
-            if(datesInTheWeek.includes(datespliced[0])){
-                console.log(item)
-                dataList.push(item.weight)
-            } else {
-                console.log("no data " + item)
+        for(let i in datesInTheWeek){
+            let checkNullValue = 0
+            for (var j in dataProp){
+                var currentData = dataProp[j]
+                let datespliced = currentData.date.split("T")
+                if (datesInTheWeek[i] === datespliced[0]){
+                    dataList.push(currentData.weight)
+                    checkNullValue++
+                }
             }
+            if (checkNullValue < 1){
+                dataList.push()
+            }
+        }
 
-        });
-        console.log(datesInTheWeek);
         return dataList;
     }
 
     function getWeekNumber(date) {
         const currentDate = new Date(date);
-        const dayOfWeek = currentDate.getUTCDay() || 7; // Ensure Sunday is 7, not 0
+        const dayOfWeek = currentDate.getUTCDay() || 7;
         currentDate.setUTCDate(currentDate.getUTCDate() + 4 - dayOfWeek);
         const yearStart = new Date(Date.UTC(currentDate.getUTCFullYear(), 0, 1));
         const weekNumber = Math.ceil((((currentDate - yearStart) / 86400000) + 1) / 7);
@@ -100,9 +104,25 @@ const LineChart = ({ filter, dataProp, todaysData }) => {
     console.log(`Week number: ${weekNumber}`);
 
 
+    function handleLabels(){
+        if(filter === 'week'){
+            const weekNumber = getWeekNumber(new Date());
+            return  getDateOfISOWeek(weekNumber, new Date().getFullYear())
+        }
+        if(filter === 'month'){
+            console.log("month");
+            return [1000, 1200, 1500, 1700, 1400, 1800];
+        }
+        if(filter === 'year'){
+            console.log("year");
+            return [1000, 1200, 1500, 1700, 1400, 1800];
+        }
+    }
+
+
 
     const data = {
-        labels: [1, 2],
+        labels: handleLabels(),
         datasets: [
             {
                 label: 'Weight (kg)',
@@ -123,7 +143,7 @@ const LineChart = ({ filter, dataProp, todaysData }) => {
             },
             title: {
                 display: true,
-                text: 'Monthly Sales Data for 2023',
+                text: 'Weight Tracker',
             },
         },
         scales: {
