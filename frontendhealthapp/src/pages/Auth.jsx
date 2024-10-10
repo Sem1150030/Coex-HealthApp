@@ -1,5 +1,6 @@
 import Login from "./Login/Login.jsx";
 import {json, redirect} from "react-router-dom";
+import {baseUrl}  from "../config.js";
 
 function AuthPage(){
     return  <Login />
@@ -26,7 +27,7 @@ export async function action({request}) {
     };
 
     // const  response = await fetch('http://localhost:5155/api/Auth/' + mode,
-    const response = await fetch('http://192.168.178.129:8001/api/Auth/' + mode,
+    const response = await fetch( baseUrl + '/api/Auth/' + mode,
 
     {
         method: 'POST',

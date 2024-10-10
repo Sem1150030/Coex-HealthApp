@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import './AddItemToShoppinglist.css'
 import CreateNewFoodItem from "../CreateNewFoodItem/CreateNewFoodItem.jsx";
+import { baseUrl } from "../../config.js";
 
 function AddItemToShoppinglist({ isOpen, onClose }) {
     const [loading, setLoading] = useState(true); // Add loading state
@@ -32,8 +33,7 @@ function AddItemToShoppinglist({ isOpen, onClose }) {
             }
 
             try {
-                // const response = await fetch('http://localhost:5155/Fooditem/User',
-                const response = await fetch('http://192.168.178.129:8001/Fooditem/User',
+                const response = await fetch(baseUrl + '/Fooditem/User',
 
 
                     {
@@ -99,7 +99,7 @@ function AddItemToShoppinglist({ isOpen, onClose }) {
 
         try {
             // const res = await fetch('http://localhost:5155/ShoppingList/AddItem',
-            const res = await fetch('http://192.168.178.129:8001/ShoppingList/AddItem',
+            const res = await fetch( baseUrl + '/ShoppingList/AddItem',
                 {
                 method: 'POST',
                 headers: {

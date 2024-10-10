@@ -3,6 +3,7 @@ import DonutChart from '../../components/Charts/DonutChart.jsx';
 import { useEffect, useState } from "react";
 import MacroDashboardData from "../../components/MacroDashboardData.jsx";
 import ShoppingList from "../../components/ShoppingList.jsx";
+import { baseUrl} from "../../config.js";
 
 export default function Macros() {
     const [data, setData] = useState(null);
@@ -22,8 +23,7 @@ export default function Macros() {
             }
 
             try {
-                // const response = await fetch('http://localhost:5155/ShoppingList/User',
-                const response = await fetch('http://192.168.178.129:8001/ShoppingList/User',{
+                const response = await fetch( baseUrl + '/ShoppingList/User',{
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`,

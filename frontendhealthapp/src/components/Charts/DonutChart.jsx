@@ -1,6 +1,7 @@
 import { Doughnut } from 'react-chartjs-2';
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
 import PropTypes from "prop-types";
+import { baseUrl } from "../../config.js";
 
 
 

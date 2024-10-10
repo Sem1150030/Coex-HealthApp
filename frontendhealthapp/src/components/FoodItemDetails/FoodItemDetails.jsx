@@ -2,6 +2,7 @@ import './FoodItemDetails.css'
 import PropTypes from "prop-types";
 import {useEffect} from "react";
 import PieChart from "../Charts/PieChart.jsx";
+import { baseUrl } from "../../config.js";
 
  function FoodItemDetails({ isOpen, onClose, foodItem }) {
      useEffect(() => {
@@ -16,7 +17,7 @@ import PieChart from "../Charts/PieChart.jsx";
 
          try {
              // const res = await fetch('http://localhost:5155/ShoppingList/DeleteItem/' + foodItemId + "/" + foodId,
-             const res = await fetch('http://192.168.178.129:8001/ShoppingList/DeleteItem/' + foodItemId + "/" + foodId,
+             const res = await fetch( baseUrl + '/ShoppingList/DeleteItem/' + foodItemId + "/" + foodId,
                  {
                  method: 'DELETE',
                  headers: {

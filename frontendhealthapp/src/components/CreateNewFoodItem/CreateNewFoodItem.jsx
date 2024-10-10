@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import './CreateNewFoodItem.css'
 import backarrow from '../../../src/assets/icons8-arrow-back-50.png';
 import foodicon from '../../../src/assets/icons8-food-and-drink-96.png';
+import {baseUrl } from "../../config.js";
 
 
 
@@ -53,7 +54,7 @@ function CreateNewFoodItem({isOpenCreate, OnCloseCreate}){
 
         try {
             // const res = await fetch('http://localhost:5155/FoodItem',
-            const res = await fetch('http://192.168.178.129:8001/FoodItem',
+            const res = await fetch( baseUrl + '/FoodItem',
                 {
                 method: 'POST',
                 headers: {

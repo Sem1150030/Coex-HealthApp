@@ -1,5 +1,7 @@
 // LineChart.js
 import React from 'react';
+import { baseUrl } from "../../config.js";
+
 import { Line } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
@@ -34,13 +36,42 @@ const LineChart = ({ filter, dataProp, todaysData }) => {
         }
         if(filter === 'month'){
             console.log("month");
-            return [1000, 1200, 1500, 1700, 1400, 1800];
+            return handleMonthFilter();
         }
         if(filter === 'year'){
             console.log("year");
             return [1000, 1200, 1500, 1700, 1400, 1800];
         }
     }
+
+    function handleMonthFilter(){
+        const monthNumber = new Date().getMonth() + 1;
+        let dates = getAllDatesInMonth(new Date().getFullYear(), monthNumber)
+        console.log(dates)
+    }
+
+    function getAllDatesInMonth(year, month) {
+        // JavaScript months are 0-indexed, so we subtract 1 from the month number
+        let firstDate = new Date(year, month - 1, 1);
+        let dates = [];
+
+        // Get the last day of the month by going to the next month and subtracting a day
+        let lastDate = new Date(year, month, 0); // 0 gets the last day of the previous month
+
+        // Loop through each day of the month
+        for (let day = firstDate.getDate(); day <= lastDate.getDate(); day++) {
+            let currentDate = new Date(year, month - 1, day);
+            let formattedDate = currentDate.toLocaleDateString('en-GB'); // Formats to 'dd-mm-yyyy'
+            dates.push(formattedDate);
+        }
+
+        return dates;
+    }
+
+// Example usage
+    let datesInOctober = getAllDatesInMonth(2024, 10);
+    console.log(datesInOctober);
+
 
 
     function handleWeekFilter(){
@@ -110,8 +141,8 @@ const LineChart = ({ filter, dataProp, todaysData }) => {
             return  getDateOfISOWeek(weekNumber, new Date().getFullYear())
         }
         if(filter === 'month'){
-            console.log("month");
-            return [1000, 1200, 1500, 1700, 1400, 1800];
+            const monthNumber = new Date().getMonth() + 1;
+            return getAllDatesInMonth(new Date().getFullYear(), monthNumber)
         }
         if(filter === 'year'){
             console.log("year");
@@ -130,9 +161,52 @@ const LineChart = ({ filter, dataProp, todaysData }) => {
                 borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 tension: 0.3,
+                spanGaps: true // Connect lines through null values
+
             },
         ],
     };
+
+    function getMonthName(monthNumber) {
+        const monthNames = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        // Since monthNumber is usually 1-based (1 = January, 12 = December), we subtract 1
+        return monthNames[monthNumber];
+    }
+
+
+    function displayX(){
+        if(filter === 'week'){
+            const weekNumber = getWeekNumber(new Date());
+            return "Week: " + weekNumber
+        }
+        if(filter === 'month'){
+            const monthNumber = new Date().getMonth() ;
+            return getMonthName(monthNumber)
+        }
+        if(filter === 'year'){
+            console.log("year");
+            return [1000, 1200, 1500, 1700, 1400, 1800];
+        }
+    }
+
+
+    function handleMaxTicks(){
+        if(filter === 'week'){
+            return 7
+        }
+        if(filter === 'month'){
+            return 7
+        }
+        if(filter === 'year'){
+            return 12
+        }
+
+    }
+
 
     const options = {
         responsive: true,  // Make chart responsive
@@ -150,13 +224,16 @@ const LineChart = ({ filter, dataProp, todaysData }) => {
             x: {
                 title: {
                     display: true,
-                    text: 'Month',
+                    text: displayX(),
+                },
+                ticks: {
+                    maxTicksLimit: handleMaxTicks(), // Show fewer ticks (e.g., 7 ticks)
                 },
             },
             y: {
                 title: {
                     display: true,
-                    text: 'Sales (USD)',
+                    text: 'Weight (kg)',
                 },
 
             },

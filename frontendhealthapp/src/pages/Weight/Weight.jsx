@@ -2,6 +2,7 @@ import LineChart from "../../components/Charts/LineChart.jsx";
 import './Weight.css';
 import {useEffect, useState} from "react";
 import {func} from "prop-types";
+import {baseUrl}  from "../../config.js";
 
 export default function Weight() {
 
@@ -23,7 +24,7 @@ export default function Weight() {
 
             try {
                 // const response = await fetch('http://localhost:5155/ShoppingList/User',
-                const response = await fetch('http://192.168.178.129:8001/Weight',{
+                const response = await fetch(  baseUrl + '/Weight',{
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`,
