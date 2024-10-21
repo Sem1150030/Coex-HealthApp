@@ -63,6 +63,8 @@ builder.Services.AddScoped<IShoppingListrepository, SQLShoppingListRepository>()
 builder.Services.AddScoped<IFoodItemRepository, SQLFoodItemRepository>();
 builder.Services.AddScoped<ITokenRepository,  TokenRepository>();
 builder.Services.AddScoped<IWeightRepository,  SQLWeightRepository>();
+builder.Services.AddScoped<IWorkoutRepository,  SQLWorkoutRepository>();
+
 
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
