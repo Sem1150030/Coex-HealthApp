@@ -13,8 +13,7 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-import PropTypes, {func} from "prop-types";
-import ShoppingList from "../ShoppingList.jsx";
+import PropTypes  from "prop-types";
 
 // Register Chart.js components
 ChartJS.register(
@@ -47,7 +46,25 @@ const LineChart = ({ filter, dataProp, todaysData }) => {
     function handleMonthFilter(){
         const monthNumber = new Date().getMonth() + 1;
         let dates = getAllDatesInMonth(new Date().getFullYear(), monthNumber)
-        console.log(dates)
+        var dataList = []
+
+        for(let i in dates){
+            let checkNullValue = 0
+            for (var j in dataProp){
+                var currentData = dataProp[j]
+                let datespliced = currentData.date.split("T")
+                if (dates[i] === datespliced[0]){
+                    dataList.push(currentData.weight)
+                    checkNullValue++
+                }
+            }
+            if (checkNullValue < 1){
+                dataList.push()
+            }
+        }
+        console.log("biem " + dataList)
+
+        return dataList;
     }
 
     function getAllDatesInMonth(year, month) {
@@ -61,12 +78,14 @@ const LineChart = ({ filter, dataProp, todaysData }) => {
         // Loop through each day of the month
         for (let day = firstDate.getDate(); day <= lastDate.getDate(); day++) {
             let currentDate = new Date(year, month - 1, day);
-            let formattedDate = currentDate.toLocaleDateString('en-GB'); // Formats to 'dd-mm-yyyy'
+            let formattedDate = currentDate.toISOString().slice(0, 10); // Formats to 'yyyy-mm-dd'
+
             dates.push(formattedDate);
         }
 
         return dates;
     }
+
 
 // Example usage
     let datesInOctober = getAllDatesInMonth(2024, 10);
@@ -77,6 +96,7 @@ const LineChart = ({ filter, dataProp, todaysData }) => {
     function handleWeekFilter(){
         const weekNumber = getWeekNumber(new Date());
         const datesInTheWeek = getDateOfISOWeek(weekNumber, new Date().getFullYear())
+        console.log(datesInTheWeek + " dates in the week");
 
         var dataList = []
 
@@ -91,7 +111,7 @@ const LineChart = ({ filter, dataProp, todaysData }) => {
                 }
             }
             if (checkNullValue < 1){
-                dataList.push()
+                dataList.push(null)
             }
         }
 
@@ -207,6 +227,36 @@ const LineChart = ({ filter, dataProp, todaysData }) => {
 
     }
 
+    function handleMinWeight(){
+       var weight = []
+       for (var i in dataProp) {
+           weight.push(dataProp[i].weight)
+
+       }
+         var lowestWeight = Math.min(...weight)
+        lowestWeight = lowestWeight - 10
+        if (lowestWeight < 0){
+            lowestWeight = 0
+        }
+        console.log("lowest weight: " + lowestWeight)
+        return lowestWeight;
+    }
+
+    function handleMaxWeight(){
+        var weight = []
+        for (var i in dataProp) {
+            weight.push(dataProp[i].weight)
+        }
+        var heighestWeight = Math.min(...weight)
+        heighestWeight = heighestWeight + 10
+        if (Math.min(...weight) > heighestWeight){
+            heighestWeight = heighestWeight + 5
+        }
+        console.log("lowest weight: " + heighestWeight)
+        return heighestWeight;
+    }
+
+
 
     const options = {
         responsive: true,  // Make chart responsive
@@ -235,6 +285,9 @@ const LineChart = ({ filter, dataProp, todaysData }) => {
                     display: true,
                     text: 'Weight (kg)',
                 },
+                min: handleMinWeight(),
+                max: handleMaxWeight()
+
 
             },
         },
@@ -243,7 +296,7 @@ const LineChart = ({ filter, dataProp, todaysData }) => {
     return (
         <>
 
-            <h2>Weight Tracker</h2>
+
             <br />
             <div className="chart-container-line">
                 <Line data={data} options={options}/>

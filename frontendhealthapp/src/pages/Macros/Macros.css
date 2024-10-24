@@ -126,6 +126,7 @@ p.dashboard2{
 
 p.information {
   color: #524848;
+  margin-left: 20px;
 }
 
 p.information2 {
@@ -215,6 +216,7 @@ table{
 
   p.information{
     font-size: 12px;
+    margin-left: 20px;
   }
 
   p.information2{

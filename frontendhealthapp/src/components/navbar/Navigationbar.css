@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-ul {
+.nav {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -73,7 +73,7 @@ html, body {
 }
 
 @media (max-width: 800px) {
-    ul {
+    .nav {
         height: auto;
         flex-wrap: wrap;
     }
@@ -81,7 +81,7 @@ html, body {
         margin: 15px;
     }
 
-    ul {
+    .nav {
         font-size: 12px;
     }
 }

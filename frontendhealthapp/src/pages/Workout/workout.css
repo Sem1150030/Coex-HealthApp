@@ -1,0 +1,158 @@
+
+
+.Workoutcont {
+    width: 80vw;
+    background-color: #95B7DF;
+    box-shadow: 6px 6px 5px 5px gray;
+    border-radius: 20px;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    margin: auto;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Enable wrapping to new lines */
+}
+
+.workoutItem h2 {
+    text-align: center;
+}
+
+.excerciseItem {
+    border-radius: 20px;
+    margin-left: 20px;
+}
+
+.lineblack {
+    background-color: black;
+    margin-top: 5px;
+}
+
+.excercise {
+
+    font-size: 18px;
+    margin-top: 10px;
+    margin-left: -20%;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px; /* Add some space at the bottom */
+}
+
+.buttondetailscont{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    height: 20%;
+    justify-content: center;
+
+}
+
+.workoutItem{
+    border-radius: 20px;
+    height: 100%;
+    background-color: #efefef;
+    box-shadow: 6px 10px 2px 2px gray;
+
+}
+
+.workoutItem h2{
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.excerciseCont{
+    height: 80%;
+    border-radius: 20px;
+}
+
+.buttondetails{
+    color: #000000;
+    width: 70%;
+    height:  30px;
+    align-items: center;
+    background: #bbb3b3;
+    border-radius: 15px;
+
+}
+
+/* Adjust layout for smaller screens */
+@media screen and (max-width: 500px) {
+    .workoutItemCont {
+        width: 80%;
+    }
+
+    .excercise {
+        margin-left: 0%;
+    }
+}
+.Workoutcont {
+    width: 80vw;
+    background-color: #95B7DF;
+    box-shadow: 6px 6px 5px 5px gray;
+    border-radius: 20px;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    margin: auto;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Enable wrapping to new lines */
+}
+
+.workoutItemCont {
+    width: 20%;
+    height: 40vh;
+    background-color: #ffffff;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    margin-left: 40px;
+    margin-right: 40px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensure proper space distribution */
+}
+
+.workoutItem h2 {
+    text-align: center;
+}
+
+.excerciseItem {
+    margin-left: 20px;
+}
+
+.lineblack {
+    background-color: black;
+    margin-top: 5px;
+}
+
+.excercise {
+    font-size: 18px;
+    margin-top: 10px;
+    margin-left: -20%;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px; /* Add some space at the bottom */
+}
+
+
+
+/* Adjust layout for smaller screens */
+@media screen and (max-width: 500px) {
+    .workoutItemCont {
+        width: 80%;
+    }
+
+    .excercise {
+        margin-left: 0%;
+    }
+}

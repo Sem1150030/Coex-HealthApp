@@ -15,6 +15,8 @@ function CreateNewFoodItem({isOpenCreate, OnCloseCreate}){
         measurement: '',
         kcalAmount: '',
         proteinAmount: '',
+        fatAmount: '',
+        carbAmount: '',
     });
 
 
@@ -39,7 +41,7 @@ function CreateNewFoodItem({isOpenCreate, OnCloseCreate}){
     async function handleSubmit (e)  {
         e.preventDefault();
         console.log(formData);
-        if(formData.name === '' || formData.measurement === '' || formData.kcalAmount === '' || formData.proteinAmount === ''){
+        if(formData.name === '' || formData.measurement === '' || formData.kcalAmount === '' || formData.proteinAmount === '' || formData.fatAmount === '' || formData.carbAmount === ''){
             return alert('Please fill in all fields')
         }
 
@@ -50,6 +52,10 @@ function CreateNewFoodItem({isOpenCreate, OnCloseCreate}){
         if (formData.kcalAmount > 9999 || formData.proteinAmount > 9999){
             return alert('Kcal and Protein Amount must be less than 9999')
         }
+        if (formData.fatAmount < 0 || formData.carbAmount < 0){
+            return alert('Fat and Carb Amount cannot be negative')
+        }
+
         const jwtToken = localStorage.getItem('token')
 
         try {
@@ -154,8 +160,26 @@ function CreateNewFoodItem({isOpenCreate, OnCloseCreate}){
 
 
                             ></input>
-                            <input className='CreateInputNumber' placeholder="Fat (gr)" type='number'></input>
-                            <input className='CreateInputNumber' placeholder="Carbs (gr)" type='number'></input>
+                            <input className='CreateInputNumber'
+                                   placeholder="Fat (gr)"
+                                   type='number'
+                                   name={'fatAmount'}
+                                   value={formData.fatAmount}
+                                   onChange={handleChange}
+                                   required={true}
+                                   maxLength={4} pattern="\d{1, 4}"
+                                   minLength={1}></input>
+
+
+                            <input className='CreateInputNumber'
+                                   placeholder="Carbs (gr)"
+                                   type='number'
+                                   name={'carbAmount'}
+                                   value={formData.carbAmount}
+                                   onChange={handleChange}
+                                   required={true}
+                                   maxLength={4} pattern="\d{1, 4}"
+                                   minLength={1}></input>
 
                             <button onClick={handleSubmit} className='Add'>Create</button>
                         </form>

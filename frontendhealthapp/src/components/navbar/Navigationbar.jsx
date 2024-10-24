@@ -5,7 +5,7 @@ export default function Navigationbar() {
     const token = useRouteLoaderData('root');
     return (
         <div className='navbar'>
-            <ul>
+            <ul className='nav'>
                 {/* Left section: Settings */}
                 <li className='settingsButton'>
                     <NavLink
