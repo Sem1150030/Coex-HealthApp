@@ -9,26 +9,26 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HealthApp_Backend.Controllers;
 
-[ApiController]
-[Authorize]
-[EnableCors("AllowSpecificOrigin")]
-[Route("[controller]")]
-public class ShoppingListController : Controller
-{
-    
-    private readonly IShoppingListrepository iShoppingListrepository;
-    private readonly IMapper mapper;
-    private readonly IFoodItemRepository foodItemRepository;
 
-    
-    public ShoppingListController(IShoppingListrepository iShoppingListrepository, IMapper mapper, 
-        IFoodItemRepository foodItemRepository)
-    {
-        this.iShoppingListrepository = iShoppingListrepository;
-        this.mapper = mapper;
-        this.foodItemRepository = foodItemRepository;
-    }
-    //Dev Only
+    //Dev Only[ApiController]
+              [Authorize]
+              [EnableCors("AllowSpecificOrigin")]
+              [Route("[controller]")]
+              public class ShoppingListController : Controller
+              {
+                  
+                  private readonly IShoppingListrepository iShoppingListrepository;
+                  private readonly IMapper mapper;
+                  private readonly IFoodItemRepository foodItemRepository;
+              
+                  
+                  public ShoppingListController(IShoppingListrepository iShoppingListrepository, IMapper mapper, 
+                      IFoodItemRepository foodItemRepository)
+                  {
+                      this.iShoppingListrepository = iShoppingListrepository;
+                      this.mapper = mapper;
+                      this.foodItemRepository = foodItemRepository;
+                  }
     [HttpGet]
     public async Task<IActionResult> GetAllShoppingListItems()
     {
@@ -116,8 +116,8 @@ public class ShoppingListController : Controller
         
         var newKcal = shoppingList.kcalCurrent - foodItem.kcalAmount;
         var newProtein = shoppingList.proteinCurrent - foodItem.proteinAmount;
-        var newFat = shoppingList.fatCurrent + foodItem.fatAmount;
-        var newCarb = shoppingList.carbCurrent + foodItem.carbAmount;
+        var newFat = shoppingList.fatCurrent - foodItem.fatAmount;
+        var newCarb = shoppingList.carbCurrent - foodItem.carbAmount;
         var result = await iShoppingListrepository.deleteItemFromShoppingListAsync(id);
         if(result == null)
         {

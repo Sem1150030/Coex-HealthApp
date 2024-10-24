@@ -83,6 +83,8 @@ public class FoodItemController : Controller
              name = foodItemDto.name,
              kcalAmount = foodItemDto.kcalAmount,
              proteinAmount = foodItemDto.proteinAmount,
+                carbAmount = foodItemDto.carbAmount,
+                fatAmount = foodItemDto.fatAmount,
              measurement = foodItemDto.measurement,
              ShoppingListFoodItems = shoppingListFoodItemDtos,
              userId = userId
