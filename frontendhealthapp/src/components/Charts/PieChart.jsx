@@ -2,17 +2,18 @@ import React from 'react';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import '../FoodItemDetails/FoodItemDetails.css';
+import PropTypes from "prop-types";
 
 // Register the components required by Chart.js
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const PieChart = () => {
+const PieChart = ({protein, carbs, fat}) => {
     const data = {
         labels: ['Protein', 'Carbs', 'Fat'],
         datasets: [
             {
                 label: 'grams',
-                data: [30, 17, 23],
+                data: [protein, carbs, fat],
                 backgroundColor: [
                     'rgba(255, 99, 132, 1)',
                     'rgba(54, 162, 235, 1)',
@@ -50,6 +51,12 @@ const PieChart = () => {
             </div>
         </div>
     );
+};
+
+PieChart.prototype = {
+    protein: PropTypes.number.isRequired,
+    carbs: PropTypes.number.isRequired,
+    fat: PropTypes.number.isRequired,
 };
 
 export default PieChart;

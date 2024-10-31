@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import LineChart from "../../components/Charts/LineChart.jsx";
 import { baseUrl } from "../../config.js";
 import './Weight.css';
+import BMICalculator from "../../components/BMI calc/BMIcalc.jsx";
 
 export default function Weight() {
 
@@ -141,52 +142,57 @@ export default function Weight() {
             <div className="linechartContainer">
                 <div className='linechartContainer'>
                     <h2>Weight Tracker</h2>
-                    <br />
+                    <br/>
                     <select className="select" value={filter} onChange={handleFilterChange}>
                         <option value="week">Week</option>
                         <option value="month">Month</option>
-                        <option value="year">Year</option>
+
                     </select>
 
-                    <LineChart filter={filter} dataProp={data} todaysData={{ "date": "2024-10-07T00:00:00" }} />
+                    <LineChart filter={filter} dataProp={data} todaysData={{"date": "2024-10-07T00:00:00"}}/>
 
 
-                <div className="WeightFormContainer">
-                    <form className="WeightForm">
-                        <br/>
-                        <div >
-                            <label className='information'>Current weight</label> <br/>
+                    <div className="WeightFormContainer">
+                        <form className="WeightForm">
+                            <br/>
+                            <div>
+                                <label className='information'>Current weight</label> <br/>
 
+                                <input
+                                    className="WeightInput"
+                                    placeholder="Current weight"
+                                    type="number"
+                                    value={currentWeight || ''}  // Set default value
+                                    onChange={handleCurrentWeightChange}
+                                />
+
+                                <button className="Add" type="submit" onClick={handleGoalWeightSubmit}>
+                                    Set
+                                </button>
+                            </div>
+                            <br/>
+
+                            <br/><label className='information'>Weight goal</label> <br/>
                             <input
                                 className="WeightInput"
-                                placeholder="Current weight"
+                                placeholder="Weight goal"
                                 type="number"
-                                value={currentWeight || ''}  // Set default value
-                                onChange={handleCurrentWeightChange}
+                                value={goalWeight || ''}  // Set default value
+                                onChange={handleGoalWeightChange}
                             />
 
                             <button className="Add" type="submit" onClick={handleGoalWeightSubmit}>
                                 Set
                             </button>
-                        </div>
-                        <br/>
-
-                        <br/><label className='information'>Weight goal</label> <br/>
-                        <input
-                            className="WeightInput"
-                            placeholder="Weight goal"
-                            type="number"
-                            value={goalWeight || ''}  // Set default value
-                            onChange={handleGoalWeightChange}
-                        />
-
-                        <button className="Add" type="submit" onClick={handleGoalWeightSubmit}>
-                            Set
-                        </button>
-                    </form>
-                </div>
+                        </form>
+                    </div>
                 </div>
             </div>
+
+            <div className="linechartContainer">
+                <BMICalculator/>
+            </div>
+            <br/><br/><br/>
         </div>
     );
 }

@@ -52,7 +52,7 @@ import { baseUrl } from "../../config.js";
                 <br/>
                 <div className="dataDetails">
                     <div className='Piechart'>
-                        <PieChart/>
+                        <PieChart carbs={foodItem.foodItem.carbAmount} fat={foodItem.foodItem.fatAmount} protein={foodItem.foodItem.proteinAmount}/>
                     </div>
                     <br/>
                     <hr/>
@@ -78,11 +78,11 @@ import { baseUrl } from "../../config.js";
                                 </tr>
                                 <tr>
                                     <td className='id' style={{border: '1px solid black', padding: '8px'}}>Carbs:</td>
-                                    <td style={{border: '1px solid black', padding: '8px'}}>30gr</td>
+                                    <td style={{border: '1px solid black', padding: '8px'}}>{foodItem.foodItem.carbAmount}gr</td>
                                 </tr>
                                 <tr>
                                     <td className='id' style={{border: '1px solid black', padding: '8px'}}>Fat:</td>
-                                    <td style={{border: '1px solid black', padding: '8px'}}>24gr</td>
+                                    <td style={{border: '1px solid black', padding: '8px'}}>{foodItem.foodItem.fatAmount}gr</td>
                                 </tr>
                                 <tr>
                                     <td className='id' style={{border: '1px solid black', padding: '8px'}}>Measurement:</td>

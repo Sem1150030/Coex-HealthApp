@@ -43,27 +43,21 @@ const LineChart = ({ filter, dataProp, todaysData }) => {
         }
     }
 
-    function handleMonthFilter(){
+    function handleMonthFilter() {
         const monthNumber = new Date().getMonth() + 1;
-        let dates = getAllDatesInMonth(new Date().getFullYear(), monthNumber)
-        var dataList = []
+        const dates = getAllDatesInMonth(new Date().getFullYear(), monthNumber);
+        let dataList = [];
 
-        for(let i in dates){
-            let checkNullValue = 0
-            for (var j in dataProp){
-                var currentData = dataProp[j]
-                let datespliced = currentData.date.split("T")
-                if (dates[i] === datespliced[0]){
-                    dataList.push(currentData.weight)
-                    checkNullValue++
-                }
+        dates.forEach((date) => {
+            const dataPoint = dataProp.find((entry) => entry.date.split("T")[0] === date);
+            if (dataPoint) {
+                dataList.push(dataPoint.weight);
+            } else {
+                dataList.push(null); // Fills in missing days with `null` for better chart alignment
             }
-            if (checkNullValue < 1){
-                dataList.push()
-            }
-        }
-        console.log("biem " + dataList)
+        });
 
+        console.log("Monthly data: ", dataList);
         return dataList;
     }
 
