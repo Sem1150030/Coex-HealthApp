@@ -9,10 +9,10 @@ export default function Navigationbar() {
                 {/* Left section: Settings */}
                 <li className='settingsButton'>
                     <NavLink
-                        to='/Workout'
+                        to='/Profile'
                         className={({isActive}) => (isActive ? 'active' : '')}
                     >
-                        Settings
+                        Profile
                     </NavLink>
                 </li>
 

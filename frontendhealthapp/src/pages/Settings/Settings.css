@@ -1,0 +1,8 @@
+.containerSettings {
+    text-align: center;
+    width: 680px;
+    height: 720px;
+    background-color: #95B7DF;
+    box-shadow: 6px 6px 5px 5px gray;
+    border-radius: 20px;
+}

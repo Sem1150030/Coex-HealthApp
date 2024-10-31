@@ -1,0 +1,23 @@
+
+.shoppingListItemContainerH {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Adds spacing between items */
+
+
+}
+
+.shoppingListItemContainerH .arrayItemsH  {
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 80%;
+    margin: 0 auto; /* Centering */
+    border-radius: 25px;
+    align-items: center;
+}
+
+.arrayItemsH{
+    display: flex;
+}

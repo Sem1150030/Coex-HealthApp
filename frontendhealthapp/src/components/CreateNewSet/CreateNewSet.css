@@ -1,0 +1,63 @@
+
+
+.modal-content-set {
+    background-color: #95B7DF; /* White background for the modal box */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    width: 90%; /* Responsive width */
+    max-width: 600px; /* Maximum width */
+    text-align: center; /* Center text */
+    height: 50%;
+}
+
+/* Additional styles for form elements */
+.modal-content-set form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between form elements */
+}
+
+.modal-content-set label {
+    margin-bottom: 5px;
+}
+
+.close-button {
+    margin-top: 15px;
+    padding: 8px 15px;
+    background-color: #d9534f; /* Close button color */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.CreateInputSet{
+    width: 70%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+    border-width: 2px;
+    border-color: #2162A3;
+}
+
+
+.AddSetButton {
+    background-color: #4CAF50;
+    margin-top: 15px;
+    padding: 8px 15px;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+
+.AddSetButton:hover {
+    background-color: #45a049;
+}

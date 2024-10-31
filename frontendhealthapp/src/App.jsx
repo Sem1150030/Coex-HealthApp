@@ -8,6 +8,10 @@ import AuthPage, {action as authAction} from "./pages/Auth.jsx";
 import ErrorPage from "./pages/Error.jsx";
 import {action as logoutAction} from "./pages/Logout.js";
 import {checkAuthLoader, tokenLoader} from './util/auth.js';
+import WorkoutDetails from "./pages/WorkoutDetails/WorkoutDetails.jsx";
+import Settings from "./pages/Settings/Settings.jsx";
+import MacroHistory from "./pages/Macros-History/Macro-History.jsx";
+import MacroHistoryDetails from "./pages/MacroHistoryDetails/MacroHistoryDetails.jsx";
 
 const router = createBrowserRouter([
     {
@@ -27,7 +31,15 @@ const router = createBrowserRouter([
 
             { path: '/auth', element: <AuthPage />, action: authAction},
             { path: '/workout', element: <Workout />, loader: checkAuthLoader},
-            {path: '/Logout', action: logoutAction}
+            { path: '/Logout', action: logoutAction},
+            { path: '/workoutDetails', element: <WorkoutDetails />, loader: checkAuthLoader }, // <-- Add this line
+            { path: '/Profile', element: <Settings />, loader: checkAuthLoader},
+            { path: '/macros/history', element: <MacroHistory />, loader: checkAuthLoader},
+            { path: '/macros/history/details', element: <MacroHistoryDetails />, loader: checkAuthLoader},
+
+
+
+
 
         ]
     }

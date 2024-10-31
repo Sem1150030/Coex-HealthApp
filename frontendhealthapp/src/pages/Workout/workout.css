@@ -6,12 +6,13 @@
     box-shadow: 6px 6px 5px 5px gray;
     border-radius: 20px;
     padding-bottom: 50px;
-    padding-top: 50px;
+    padding-top: 10px;
     margin: auto;
     margin-top: 50px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap; /* Enable wrapping to new lines */
+
 }
 
 .workoutItem h2 {
@@ -54,8 +55,8 @@
 .workoutItem{
     border-radius: 20px;
     height: 100%;
-    background-color: #efefef;
-    box-shadow: 6px 10px 2px 2px gray;
+    background-color: #C3D7EF;
+    /*box-shadow: 6px 10px 2px 2px #9a9898;*/
 
 }
 
@@ -63,6 +64,7 @@
     font-size: 20px;
     margin-top: 5px;
     margin-bottom: 10px;
+    /*color: #f29999;*/
 }
 
 .excerciseCont{
@@ -75,10 +77,19 @@
     width: 70%;
     height:  30px;
     align-items: center;
-    background: #bbb3b3;
+    background: #afc7e4;
     border-radius: 15px;
 
 }
+
+.buttondetails:hover {
+    background-color: #96aec7; /* Slightly darker shade */
+}
+
+.buttondetails:active {
+    background-color: #81a2c5; /* Slightly darker shade */
+}
+
 
 /* Adjust layout for smaller screens */
 @media screen and (max-width: 500px) {
@@ -144,6 +155,14 @@
     margin-bottom: 10px; /* Add some space at the bottom */
 }
 
+
+.containerWB {
+    padding-top: 60px;
+
+    display: flex;              /* Enable Flexbox */
+    justify-content: center;    /* Center horizontally */
+    align-items: center;        /* Center vertically */
+}
 
 
 /* Adjust layout for smaller screens */

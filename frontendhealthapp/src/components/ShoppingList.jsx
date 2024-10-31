@@ -7,7 +7,7 @@ import AddItemToShoppinglist from "./AdditemToShoppingList/AddItemToShoppinglist
 
 
 
-function ShoppingList({ data  }) {
+function ShoppingList({ data, isHistory  }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedFoodItem, setSelectedFoodItem] = useState(null);
     const [isAddItemOpen, setisAddItemOpen] = useState(false);
@@ -58,10 +58,12 @@ function ShoppingList({ data  }) {
             <div className='titlecontainer'>
                 <h2 className="titleShoppinglist">Shopping List</h2>
                 <div className="imageAdd">
-                    <img src={addicon} alt="add icon" className="addicon" height={40} width={40}
-                         role="button"
-                         tabIndex={0}
-                         onClick={() => handleClickAddItem() }/>
+                    {!isHistory && (
+                        <img src={addicon} alt="add icon" className="addicon" height={40} width={40}
+                             role="button"
+                             tabIndex={0}
+                             onClick={() => handleClickAddItem()}/>
+                    )}
                 </div>
             </div>
             <br/>
@@ -99,6 +101,7 @@ function ShoppingList({ data  }) {
 
 ShoppingList.propTypes = {
     data: PropTypes.array.isRequired,  // Added isRequired to enforce prop type validation
+    isHistory: PropTypes.bool
 };
 
 export default ShoppingList;

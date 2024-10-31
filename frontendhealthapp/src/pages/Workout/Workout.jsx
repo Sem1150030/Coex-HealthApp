@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom';
 import './Workout.css';
 import {useEffect, useState} from "react";
 import {baseUrl} from "../../config.js";
+import { useNavigate } from 'react-router-dom';
+import CreateNewSet from "../../components/CreateNewSet/CreateNewSet.jsx";
+import AddWorkout from "../../components/AddWorkout/AddWorkout.jsx";
 
 
 export default function Workout() {
@@ -10,6 +13,10 @@ export default function Workout() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [workoutData, setWorkoutData] = useState([{}]);
+    const navigate = useNavigate();
+    const [isCreateFoodItemOpen, SetisCreateFoodItemOpen] = useState(false);
+
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -49,6 +56,19 @@ export default function Workout() {
         fetchData();
     }, []);
 
+    function handleClick(exc){
+        navigate(`/workoutDetails?workoutId=${exc.id}`);
+    }
+
+    function handleClickCreateItem() {
+        SetisCreateFoodItemOpen(true);
+
+    }
+
+    function closeCreateItem() {
+        SetisCreateFoodItemOpen(false);
+    }
+
     if (loading) {
         return <div className='loading'>Loading...</div>;
     }
@@ -57,14 +77,19 @@ export default function Workout() {
         return <div className='error'>{error}</div>;
     }
 
-
+    
 
     return (
         <div>
             <div className='container'>
                 <h1 className='title'>Workout</h1>
             </div>
+            <div className='containerWB'>
+                <button className='Add' onClick={handleClickCreateItem}>Add Workout</button>
+            </div>
             <div className="Workoutcont">
+
+                <br/>
                 {data.map((workout, index) => (
                     <div key={index} className="workoutItemCont">
                         <div className='workoutItem'>
@@ -84,7 +109,7 @@ export default function Workout() {
                             ))}
                             </div>
                             <div className="buttondetailscont">
-                                <button className='buttondetails'>Details</button>
+                                <button   onClick={() => handleClick(workout)} className='buttondetails'>Details</button>
                             </div>
 
                         </div>
@@ -93,7 +118,9 @@ export default function Workout() {
                 ))}
 
             </div>
+            <br/> <br/>
 
+            <AddWorkout isOpenCreate={isCreateFoodItemOpen} OnCloseCreate={closeCreateItem} />
 
         </div>
     );
