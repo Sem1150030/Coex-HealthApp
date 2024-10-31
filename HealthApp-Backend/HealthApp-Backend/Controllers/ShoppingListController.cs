@@ -32,7 +32,14 @@ namespace HealthApp_Backend.Controllers;
     [HttpGet]
     public async Task<IActionResult> GetAllShoppingListItems()
     {
-        var shoppingListItems = await iShoppingListrepository.GetAllShoppingListItemsAsync();
+        var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdString == null)
+        {
+            return NotFound("User not found");
+        }
+        var userId = Guid.Parse(userIdString);
+        
+        var shoppingListItems = await iShoppingListrepository.GetAllShoppingListItemsAsync(userId);
 
         
         var shoppingListDtos = mapper.Map<List<ShoppingListReturnDto>>(shoppingListItems);
@@ -45,8 +52,13 @@ namespace HealthApp_Backend.Controllers;
     [Route("{id:Guid}")]
     public async Task<IActionResult> GetShoppingListPerId(Guid id)
     {
-        
-        var shoppingListItems = await iShoppingListrepository.GetShoppingListPerId(id);
+        var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (userIdString == null)
+                {
+                    return NotFound("User not found");
+                }
+        var userId = Guid.Parse(userIdString);
+        var shoppingListItems = await iShoppingListrepository.GetShoppingListPerId(id, userId);
         var shoppingListDtos = mapper.Map<ShoppingListReturnDto>(shoppingListItems);
         
         return Ok(shoppingListDtos);
@@ -156,6 +168,33 @@ namespace HealthApp_Backend.Controllers;
         
         
         return Ok(shoppingListDtos);
+    }
+
+    [HttpPut]
+    [Route("UpdateItem/Goals")]
+    public async Task<IActionResult> UpdateGoals([FromBody] UpdateGoalsDto updateGoalsDto)
+    {
+        var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdString == null)
+        {
+            return NotFound("User not found");
+        }
+        var userId = Guid.Parse(userIdString);
+        var todaysDate = DateTime.Now.Date;
+        
+        var shoppingList = await iShoppingListrepository.GetShoppingListByUIDAndDateAsync(userId, todaysDate);
+        var newKcalGoal = updateGoalsDto.KcalGoal;
+        var newProteinGoal = updateGoalsDto.proteinGoal;
+        var newFatGoal = updateGoalsDto.fatGoal;
+        var newCarbGoal = updateGoalsDto.carbGoal;
+        
+        var result = await iShoppingListrepository.updateShoppingListGoalsAsync(newKcalGoal, newProteinGoal, newFatGoal, newCarbGoal, userId, todaysDate);
+        if (result == null)
+        {
+            return NotFound("Something went wrong updating the shopping list goals");
+        }
+        
+        return Ok(result);
     }
 
 

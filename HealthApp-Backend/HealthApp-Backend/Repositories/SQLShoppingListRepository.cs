@@ -14,20 +14,22 @@ public class SQLShoppingListRepository: IShoppingListrepository
         this.dbContext = dbContext;
     }
     
-    public async Task<List<ShoppingList>> GetAllShoppingListItemsAsync()
+    public async Task<List<ShoppingList>> GetAllShoppingListItemsAsync(Guid userId)
     {
         return await dbContext.ShoppingLists
+            .Where(sl => sl.UserId == userId) // Add filter for userId
             .Include(sl => sl.ShoppingListFoodItems)
             .ThenInclude(slfi => slfi.FoodItem)
             .ToListAsync();
+
     }
 
   
 
-    public async Task<ShoppingList?> GetShoppingListPerId(Guid id)
+    public async Task<ShoppingList?> GetShoppingListPerId(Guid id, Guid userId)
     {
         return await dbContext.ShoppingLists.Include(sl => sl.ShoppingListFoodItems)
-            .ThenInclude(slfi => slfi.FoodItem).FirstOrDefaultAsync(x => x.Id == id);
+            .ThenInclude(slfi => slfi.FoodItem).FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
 
     }
 
@@ -126,5 +128,24 @@ public class SQLShoppingListRepository: IShoppingListrepository
         dbContext.ShoppingListFoodItems.Remove(checkIfItemExists);
         await dbContext.SaveChangesAsync();
         return checkIfItemExists;
+    }
+
+    public async Task<ShoppingList> updateShoppingListGoalsAsync(int newKcalGoal, int newProteinGoal, int newFatGoal, int newCarbGoal, Guid userId,
+        DateTime todaysDate)
+    {
+        var shoppingList = await dbContext.ShoppingLists.Include(sl => sl.ShoppingListFoodItems)
+            .ThenInclude(slfi => slfi.FoodItem).FirstOrDefaultAsync(x => x.UserId == userId && x.CreatedOn == todaysDate);
+        if (shoppingList == null)
+        {
+            return null;
+        }
+        shoppingList.KcalGoal = newKcalGoal;
+        shoppingList.proteinGoal = newProteinGoal;
+        shoppingList.fatGoal = newFatGoal;
+        shoppingList.carbGoal = newCarbGoal;
+        await dbContext.SaveChangesAsync();
+        return shoppingList;
+        
+       
     }
 }

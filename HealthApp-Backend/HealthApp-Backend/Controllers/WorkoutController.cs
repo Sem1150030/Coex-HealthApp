@@ -43,6 +43,19 @@ public class WorkoutController : Controller
         var workoutData = await iWorkoutRepository.getWorkoutDataByUserIdAsync(Guid.Parse(userIdString));
         return Ok(workoutData);
     }
+    
+    [HttpGet]
+    [Route("/Workout/user/{WorkoutId:Guid}")]
+    public async Task<IActionResult>    getWorkoutDataByWorkoutId(Guid WorkoutId)
+    {
+        var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdString == null)
+        {
+            return NotFound("User not found");
+        }
+        var workoutData = await iWorkoutRepository.getWorkoutDataByWorkoutIdAsync(WorkoutId, Guid.Parse(userIdString));
+        return Ok(workoutData);
+    }
 
     [HttpPost]
     [Route("/Workout/addworkout")]
@@ -111,6 +124,42 @@ public class WorkoutController : Controller
         if (workout == null)
         {
             return NotFound("Set_Id not found or does not belong to user");
+        }
+        
+        return Ok(workout);
+    }
+    
+    [HttpDelete]
+    [Route("/Workout/DeleteExcercise/{excerciseId:Guid}")]
+    public async Task<IActionResult> DeleteExcercise(Guid excerciseId)
+    {
+        var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdString == null)
+        {
+            return NotFound("User not found");
+        }
+        var workout = await iWorkoutRepository.DeleteExercise(excerciseId, Guid.Parse(userIdString));
+        if (workout == null)
+        {
+            return NotFound("Excercise not found or does not belong to user");
+        }
+        
+        return Ok(workout);
+    }
+    
+    [HttpDelete]
+    [Route("/Workout/DeleteWorkout/{workoutId:Guid}")]
+    public async Task<IActionResult> DeleteWorkout(Guid workoutId)
+    {
+        var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdString == null)
+        {
+            return NotFound("User not found");
+        }
+        var workout = await iWorkoutRepository.DeleteWorkout(workoutId, Guid.Parse(userIdString));
+        if (workout == null)
+        {
+            return NotFound("Workout not found or does not belong to user");
         }
         
         return Ok(workout);

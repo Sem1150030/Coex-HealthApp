@@ -7,9 +7,13 @@ public interface IWorkoutRepository
 {
     Task<List<Workout>> getWorkoutDataByUserIdAsync(Guid userId);
     Task<Workout> AddWorkout(Guid userId, string name);
+    Task<Workout?> getWorkoutDataByWorkoutIdAsync(Guid workoutId, Guid userId);
+
     Task<Exercise> AddExercise(Guid workoutId, string name, Guid userId);
     Task<Set> AddSet(Guid exerciseId, int reps, decimal weight, Guid userId);
     Task<Set?> UpdateSet(UpdateSetDto addSetDto, Guid userId);
     Task<Set?> DeleteSet(Guid setId, Guid userId);
+    Task<Exercise?> DeleteExercise(Guid exerciseId, Guid userId);
+    Task<Workout?> DeleteWorkout(Guid workoutId, Guid userId);
 
 }
