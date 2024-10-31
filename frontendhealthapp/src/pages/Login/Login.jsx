@@ -11,6 +11,8 @@ export default function Login() {
 
     return (
         <>
+            <div className='container'>
+                <div className='containerMacros'>
             <Form method="post" className="form">
                 <h1>{isLogin ? 'Log in' : 'Create a new user'}</h1>
                 {data && data.errors && (
@@ -20,6 +22,7 @@ export default function Login() {
                         ))}
                     </ul>
                 )}
+                <br/>
                 {data && data.message && <p>{data.message}</p>}
                 <p>
                     <label htmlFor="email">Email</label>
@@ -36,6 +39,8 @@ export default function Login() {
                     <button disabled={isSubmitting}>{isSubmitting ? 'submitting ...': 'save'}</button>
                 </div>
             </Form>
+                </div>
+            </div>
         </>
     );
 }
